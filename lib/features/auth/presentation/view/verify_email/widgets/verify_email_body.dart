@@ -1,5 +1,6 @@
 import 'package:capstone/features/auth/presentation/view/set_new_password_view.dart/set_new_password_view.dart';
 import 'package:capstone/resources/color_manager.dart';
+import 'package:capstone/resources/text_styles.dart';
 import 'package:capstone/utils/widgets/custom_buttons.dart';
 import 'package:flutter/material.dart';
 
@@ -16,10 +17,7 @@ class VerifyEmailBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Text('Verify Your Email',
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 24
-          ),),
+          style: TextStyles.black30W600,),
           Text('We’ll send the code on $email',
           style: const TextStyle(
             fontWeight: FontWeight.w400,

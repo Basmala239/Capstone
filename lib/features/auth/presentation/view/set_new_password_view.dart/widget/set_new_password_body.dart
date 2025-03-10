@@ -1,4 +1,5 @@
 import 'package:capstone/features/home/presentation/view/home_view.dart';
+import 'package:capstone/resources/text_styles.dart';
 import 'package:capstone/utils/widgets/custom_buttons.dart';
 import 'package:capstone/utils/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -15,10 +16,7 @@ class SetNewPasswordBody extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text('Set The New Password',
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 20,
-            ),),
+            style: TextStyles.black30W600,),
             const SizedBox(height: 30,),
             CustomTextField(
               ontap: (){

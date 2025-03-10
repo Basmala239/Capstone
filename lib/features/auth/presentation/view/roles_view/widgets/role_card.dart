@@ -1,6 +1,7 @@
 import 'package:capstone/resources/color_manager.dart';
 import 'package:capstone/features/auth/data/models/roles_models/role_card_model.dart';
 import 'package:capstone/features/auth/presentation/view/login_view/login_view.dart';
+import 'package:capstone/resources/text_styles.dart';
 import 'package:flutter/material.dart';
 
 Widget roleCard(RoleCardModel role, int index, BuildContext context){
@@ -23,7 +24,7 @@ Widget roleCard(RoleCardModel role, int index, BuildContext context){
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Image.asset(role.image),
-          Text(role.role)
+          Text(role.role, style: index%2==0? TextStyles.white24w600:TextStyles.black24w600,)
         ],
       ),
     ),

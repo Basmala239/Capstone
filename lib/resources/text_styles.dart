@@ -17,5 +17,45 @@ class TextStyles {
       fontSize: 24,
       fontWeight: FontWeight.w700,
       color: ColorManager.white);
+
+  static const TextStyle white24w600 = TextStyle(
+      fontSize: 24,
+      fontWeight: FontWeight.w600,
+      color: ColorManager.white);
+
+  static const TextStyle white22w700 = TextStyle(
+      fontSize: 22,
+      fontWeight: FontWeight.w700,
+      color: ColorManager.white);
+
+  static const TextStyle black24w600 = TextStyle(
+      fontSize: 24,
+      fontWeight: FontWeight.w600,
+      color: ColorManager.black);
+
+  static const TextStyle black30W600 = TextStyle(
+      fontSize: 30,
+      fontWeight: FontWeight.w600,
+      color: ColorManager.black);
+  static const TextStyle black36W600Italic = TextStyle(
+      fontSize: 36,
+      fontStyle: FontStyle.italic,
+      fontWeight: FontWeight.w600,
+      color: ColorManager.black);
+
+  static const TextStyle black22W500 = TextStyle(
+      fontSize: 22,
+      fontWeight: FontWeight.w500,
+      color: ColorManager.black)
+      ;
+  static const TextStyle black20W500 = TextStyle(
+      fontSize: 20,
+      fontWeight: FontWeight.w500,
+      color: ColorManager.black);
+
+  static const TextStyle gray18W400 = TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w400,
+      color: ColorManager.gray4D);
   
 }

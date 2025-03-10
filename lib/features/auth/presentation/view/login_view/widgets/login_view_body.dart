@@ -1,6 +1,7 @@
 import 'package:capstone/features/auth/presentation/view/reset_password/reset_password_view.dart';
 import 'package:capstone/features/home/presentation/view/home_view.dart';
 import 'package:capstone/resources/color_manager.dart';
+import 'package:capstone/resources/text_styles.dart';
 import 'package:capstone/utils/widgets/custom_buttons.dart';
 import 'package:capstone/utils/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text('Log in'),
+            Text('Log in',
+            style: TextStyles.black30W600,),
             const SizedBox(height: 30,),
             CustomTextField(controller: _emailController,
               hint: 'Email',
@@ -47,29 +49,21 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                     Checkbox(
                       checkColor: ColorManager.gray4D,
                       activeColor: ColorManager.white,
-                      value: true,
+                      value: false,
                       onChanged: (bool? value) {
                        
                       },
                     ),
                     const SizedBox(width:5,),
                     const Text('Remember Me',
-                    style: TextStyle(
-                      color: ColorManager.gray4D,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 13
-                    ),),
+                    style: TextStyles.gray18W400,),
                     const Spacer(),
                     TextButton(onPressed: (){
 
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>ResetPasswordView()));
 
                     }, child: const Text('Forgot Password?',
-                    style: TextStyle(
-                      color: ColorManager.gray4D,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 13
-                    ),))
+                    style: TextStyles.gray18W400,))
                   ],
                 ),
                 const SizedBox(height: 20,),

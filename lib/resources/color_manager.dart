@@ -10,6 +10,7 @@ class ColorManager {
   static const Color blue4D=Color(0xFF06224D);
   static const Color white=Color(0xFFFFFFFF);
   static const Color whiteop=Color.fromARGB(130, 255, 255, 255);
+  static const Color op=Color.fromARGB(0, 255, 255, 255);
   static const Color black=Color(0xFF000000);
   static const Color gray4Dop=Color.fromARGB(125, 77, 77, 77);
   static const Color gray4D=Color(0xFF4D4D4D);

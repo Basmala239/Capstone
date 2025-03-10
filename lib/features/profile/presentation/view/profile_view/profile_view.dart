@@ -13,7 +13,7 @@ class ProfileView extends StatelessWidget {
       body: Stack(
         children: [
           Background(),
-          ProfileViewBody(),
+          profileViewBody(context),
         ],
       ),
     );

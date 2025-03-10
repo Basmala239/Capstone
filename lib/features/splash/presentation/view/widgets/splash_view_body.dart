@@ -1,5 +1,6 @@
 import 'package:capstone/resources/assets_manager.dart';
 import 'package:capstone/features/auth/presentation/view/roles_view/roles_view.dart';
+import 'package:capstone/resources/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class SplashBody extends StatefulWidget {
@@ -25,7 +26,7 @@ class _SplashBodyState extends State<SplashBody> {
           Image.asset(
                   AssetsManager.logoImage,
                 ),
-          Text('Capstone'),
+          Text('Capstone',style: TextStyles.black36W600Italic,),
         ],
       ),
     );

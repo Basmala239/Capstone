@@ -1,5 +1,6 @@
 import 'package:capstone/features/auth/presentation/view/verify_email/verify_email.dart';
 import 'package:capstone/resources/color_manager.dart';
+import 'package:capstone/resources/text_styles.dart';
 import 'package:capstone/utils/widgets/custom_buttons.dart';
 import 'package:capstone/utils/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -15,10 +16,7 @@ class ResetPasswordBody extends StatelessWidget {
         child: Column(
           children: [
             const Text('Reset Password',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-            ),),
+            style: TextStyles.black30W600,),
             const SizedBox(height: 20,),
             const Text('Please enter your email address to for us to send you the link to reset your password on.',
             style: TextStyle(
