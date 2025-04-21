@@ -1,5 +1,8 @@
-import 'package:capstone/features/splash/presentation/view/splash_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'features/archive/presentation/model_view/project_cubit.dart';
+import 'features/archive/presentation/view/archive_view.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -10,9 +13,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Capstone',
-      home: const SplashView(),
+      home: BlocProvider<ProjectCubit>(
+        create: (context) => ProjectCubit(),
+        child: ArchiveView(),
+      )
+      //home:SplashView(),
     );
   }
 }

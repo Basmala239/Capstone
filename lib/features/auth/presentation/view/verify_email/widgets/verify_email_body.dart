@@ -1,7 +1,7 @@
 import 'package:capstone/features/auth/presentation/view/set_new_password_view.dart/set_new_password_view.dart';
 import 'package:capstone/resources/color_manager.dart';
 import 'package:capstone/resources/text_styles.dart';
-import 'package:capstone/utils/widgets/custom_buttons.dart';
+import 'package:capstone/widgets/custom_buttons.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

@@ -1,6 +1,6 @@
 import 'package:capstone/resources/color_manager.dart';
-import 'package:capstone/utils/widgets/custom_buttons.dart';
-import 'package:capstone/utils/widgets/custom_text_field.dart';
+import 'package:capstone/widgets/custom_buttons.dart';
+import 'package:capstone/widgets/custom_text_field.dart';
 import 'package:flutter/widgets.dart';
 class ProfileEditViewBody extends StatefulWidget {
   const ProfileEditViewBody({super.key});

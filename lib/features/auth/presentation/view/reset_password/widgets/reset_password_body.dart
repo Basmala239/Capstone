@@ -1,8 +1,8 @@
 import 'package:capstone/features/auth/presentation/view/verify_email/verify_email.dart';
 import 'package:capstone/resources/color_manager.dart';
 import 'package:capstone/resources/text_styles.dart';
-import 'package:capstone/utils/widgets/custom_buttons.dart';
-import 'package:capstone/utils/widgets/custom_text_field.dart';
+import 'package:capstone/widgets/custom_buttons.dart';
+import 'package:capstone/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
 class ResetPasswordBody extends StatelessWidget {

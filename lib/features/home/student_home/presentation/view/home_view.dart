@@ -1,9 +1,9 @@
 import 'package:capstone/features/chatbot/presentation/view/chatbot_view.dart';
-import 'package:capstone/features/home/presentation/view/widgets/home_view_appber.dart';
-import 'package:capstone/features/home/presentation/view/widgets/home_view_body.dart';
+import 'package:capstone/features/home/student_home/presentation/view/widgets/home_view_appbar.dart';
+import 'package:capstone/features/home/student_home/presentation/view/widgets/home_view_body.dart';
 import 'package:capstone/resources/assets_manager.dart';
 import 'package:capstone/resources/color_manager.dart';
-import 'package:capstone/utils/widgets/background.dart';
+import 'package:capstone/widgets/background.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {

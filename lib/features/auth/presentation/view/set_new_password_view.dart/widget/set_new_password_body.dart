@@ -1,7 +1,7 @@
-import 'package:capstone/features/home/presentation/view/home_view.dart';
+import 'package:capstone/features/home/student_home/presentation/view/home_view.dart';
 import 'package:capstone/resources/text_styles.dart';
-import 'package:capstone/utils/widgets/custom_buttons.dart';
-import 'package:capstone/utils/widgets/custom_text_field.dart';
+import 'package:capstone/widgets/custom_buttons.dart';
+import 'package:capstone/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 class SetNewPasswordBody extends StatelessWidget {
   SetNewPasswordBody({super.key});

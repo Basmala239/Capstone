@@ -1,4 +1,4 @@
-import 'package:capstone/utils/widgets/background.dart';
+import 'package:capstone/widgets/background.dart';
 import 'package:capstone/features/auth/presentation/view/roles_view/widgets/roles_view_body.dart';
 import 'package:flutter/material.dart';
 

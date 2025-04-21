@@ -1,6 +1,6 @@
 import 'package:capstone/resources/color_manager.dart';
-import 'package:capstone/utils/widgets/background.dart';
-import 'package:capstone/utils/widgets/custom_back_button.dart';
+import 'package:capstone/widgets/background.dart';
+import 'package:capstone/widgets/custom_back_button.dart';
 import 'package:capstone/features/auth/presentation/view/set_new_password_view.dart/widget/set_new_password_body.dart';
 import 'package:flutter/material.dart';
 class SetNewPasswordView extends StatelessWidget {

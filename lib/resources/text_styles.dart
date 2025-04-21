@@ -53,9 +53,19 @@ class TextStyles {
       fontWeight: FontWeight.w500,
       color: ColorManager.black);
 
+  static const TextStyle black18W400 = TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w400,
+      color: ColorManager.black);
+
   static const TextStyle gray18W400 = TextStyle(
       fontSize: 18,
       fontWeight: FontWeight.w400,
+      color: ColorManager.gray4D);
+
+  static const TextStyle gray14W200 = TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w200,
       color: ColorManager.gray4D);
   
 }

@@ -1,6 +1,6 @@
 import 'package:capstone/resources/color_manager.dart';
-import 'package:capstone/utils/widgets/background.dart';
-import 'package:capstone/utils/widgets/custom_back_button.dart';
+import 'package:capstone/widgets/background.dart';
+import 'package:capstone/widgets/custom_back_button.dart';
 import 'package:capstone/features/auth/presentation/view/verify_email/widgets/verify_email_body.dart';
 import 'package:flutter/material.dart';
 
