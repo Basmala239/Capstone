@@ -28,6 +28,12 @@ class TextStyles {
       fontWeight: FontWeight.w700,
       color: ColorManager.white);
 
+  static const TextStyle white18w400 = TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w400,
+      color: ColorManager.white);
+
+
   static const TextStyle black24w600 = TextStyle(
       fontSize: 24,
       fontWeight: FontWeight.w600,

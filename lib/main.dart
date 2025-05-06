@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'features/archive/presentation/model_view/project_cubit.dart';
 import 'features/archive/presentation/view/archive_view.dart';
+import 'features/chatbot/presentation/view/chatbot_view.dart';
 
 
 void main() {
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       title: 'Capstone',
       home: BlocProvider<ProjectCubit>(
         create: (context) => ProjectCubit(),
-        child: ArchiveView(),
+        child: ChatbotView(),
       )
       //home:SplashView(),
     );
