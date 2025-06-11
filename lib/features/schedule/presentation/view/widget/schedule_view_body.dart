@@ -2,6 +2,7 @@ import 'package:capstone/features/schedule/presentation/view/widget/team_schedul
 import 'package:flutter/material.dart';
 
 import '../../../../../resources/assets_manager.dart';
+import '../../../../../resources/text_styles.dart';
 import '../../../../../widgets/custom_buttons.dart';
 import '../../../date/model/schedule_model.dart';
 class ScheduleViewBody extends StatefulWidget {
@@ -120,24 +121,38 @@ class _AddMeetingFormState extends State<AddMeetingForm> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text('Select date:'),
-        TextButton(
-          onPressed: _pickDate,
-          child: Text('${selectedDate.toLocal()}'.split(' ')[0]),
+        Row(
+          children: [
+            Expanded(flex: 3, child:Text('Select date:',style: TextStyles.black18W400)),
+            Expanded(flex: 5, child:TextButton(
+              onPressed: _pickDate,
+              child: Text('${selectedDate.toLocal()}'.split(' ')[0]),
+            )),
+          ],
         ),
-        Text('Set time:'),
-        TextButton(
-          onPressed: _pickTime,
-          child: Text('${selectedTime.format(context)}'),
+        const SizedBox(height: 16),
+        Row(
+          children: [
+            Expanded(flex: 3, child:Text('Set time:',style: TextStyles.black18W400)),
+            Expanded(flex: 5, child:TextButton(
+              onPressed: _pickTime,
+              child: Text(selectedTime.format(context)),
+            )),
+          ],
         ),
-        Text('Set team:'),
-        DropdownButton<String>(
-          value: selectedTeam,
-          items: widget.teamNames.map((value) => DropdownMenuItem(
-            value: value,
-            child: Text(value),
-          )).toList(),
-          onChanged: (val) => setState(() => selectedTeam = val),
+        const SizedBox(height: 16),
+        Row(
+          children: [
+            Expanded(flex: 3, child:Text('Set team:',style: TextStyles.black18W400)),
+            Expanded(flex: 5, child:DropdownButton<String>(
+              value: selectedTeam,
+              items: widget.teamNames.map((value) => DropdownMenuItem(
+                value: value,
+                child: Text(value),
+              )).toList(),
+              onChanged: (val) => setState(() => selectedTeam = val),
+            )),
+          ],
         ),
         const SizedBox(height: 16),
         Row(
@@ -150,7 +165,8 @@ class _AddMeetingFormState extends State<AddMeetingForm> {
               Navigator.pop(context);
             },editwidth:130 ,editheight: 40,),
           ],
-        )
+        ),
+        const SizedBox(height: 16),
       ],
     );
   }

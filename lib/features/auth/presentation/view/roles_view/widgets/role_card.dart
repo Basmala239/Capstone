@@ -4,10 +4,19 @@ import 'package:capstone/features/auth/presentation/view/login_view/login_view.d
 import 'package:capstone/resources/text_styles.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../data/models/user_model.dart';
+
 Widget roleCard(RoleCardModel role, int index, BuildContext context){
   return GestureDetector(
     onTap: (){
       Navigator.push(context,MaterialPageRoute(builder: (context)=>LoginView()));
+      if('admin' == role){
+        User.currentUser=User.u[0];
+      }else if('supervisor' == role){
+        User.currentUser=User.u[1];
+      }else{
+        User.currentUser=User.u[2];
+      }
     },
     child: Container(
       width: 250,

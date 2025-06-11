@@ -72,7 +72,6 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 onTap: (){
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeView()));
                 },
-                
               ),
           ],
         ),
