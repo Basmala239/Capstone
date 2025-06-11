@@ -5,6 +5,7 @@ class ColorManager {
 
   static const Color blueEC=Color(0xFFCFDCEC);
   static const Color blueFF=Color(0xFF1EA7FF);
+  static const Color blueD8=Color(0xFF6BA0D8);
   static const Color blueEo=Color(0xFF2D9AE0);
   static const Color blueCC=Color(0xFF1886CC);
   static const Color blue4D=Color(0xFF06224D);

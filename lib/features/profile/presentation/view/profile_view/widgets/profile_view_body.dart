@@ -43,7 +43,7 @@ Widget profileViewBody(BuildContext context) {
                   SizedBox(height: 25,),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
-                    child:Image.asset(AssetsManager.profileImage),
+                    child:Image.asset(AssetsManager.studentProfileImage),
                   ),
                   Text('Mohamed Ahmed',
                   style: TextStyles.gray18W400,),

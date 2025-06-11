@@ -1,8 +1,7 @@
+import 'package:capstone/features/report/presentation/view/report_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'features/archive/presentation/model_view/project_cubit.dart';
-import 'features/archive/presentation/view/archive_view.dart';
-import 'features/chatbot/presentation/view/chatbot_view.dart';
+import 'features/schedule/presentation/view/schedule_view.dart';
+import 'features/splash/presentation/view/splash_view.dart';
 
 
 void main() {
@@ -18,11 +17,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Capstone',
-      home: BlocProvider<ProjectCubit>(
-        create: (context) => ProjectCubit(),
-        child: ChatbotView(),
-      )
-      //home:SplashView(),
+      home: ScheduleView(),
+     // home: ReportView(),
     );
   }
 }
