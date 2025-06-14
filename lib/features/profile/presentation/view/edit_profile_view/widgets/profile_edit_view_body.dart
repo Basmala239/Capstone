@@ -28,13 +28,13 @@ class _MyWidgetState extends State<ProfileEditViewBody> {
     return Column(
       children: [
         SizedBox(height: 20,),
-        CustomTextField(controller: _currentPasswordController, hint: 'Current Password', ontap: (){},color: ColorManager.whiteop,),
+        CustomTextField(controller: _currentPasswordController, hint: 'Current Password',color: ColorManager.whiteop,),
         SizedBox(height: 10,),
-        CustomTextField(controller: _newPasswordController, hint: 'New Password', ontap: (){},color: ColorManager.whiteop),
+        CustomTextField(controller: _newPasswordController, hint: 'New Password',color: ColorManager.whiteop),
         SizedBox(height: 10,),
-        CustomTextField(controller: _confirmPasswordController, hint: 'Confirm Password', ontap: (){},color: ColorManager.whiteop),
+        CustomTextField(controller: _confirmPasswordController, hint: 'Confirm Password',color: ColorManager.whiteop),
         SizedBox(height: 10,),
-        CustomTextField(controller: _roleController, hint: 'Role', ontap: (){},color: ColorManager.whiteop),
+        CustomTextField(controller: _roleController, hint: 'Role',color: ColorManager.whiteop),
         SizedBox(height: 10,),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

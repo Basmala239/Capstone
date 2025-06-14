@@ -1,5 +1,4 @@
 import 'package:capstone/features/notification/presentation/view/notification_view.dart';
-import 'package:capstone/features/profile/presentation/view/profile_view/profile_view.dart';
 import 'package:capstone/resources/color_manager.dart';
 import 'package:capstone/resources/text_styles.dart';
 import 'package:flutter/material.dart';

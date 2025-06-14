@@ -1,4 +1,3 @@
-import 'package:capstone/features/user_management/presentation/view/user_view/widget/user_view_body.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../widgets/background.dart';

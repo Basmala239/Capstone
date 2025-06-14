@@ -40,7 +40,9 @@ dependencies:
   provider: ^6.1.2
   dash_chat_2: ^0.0.21
   chat_gpt_sdk: ^3.1.5
-
+  dio: ^5.4.0
+  http:
+  fl_chart: ^0.64.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

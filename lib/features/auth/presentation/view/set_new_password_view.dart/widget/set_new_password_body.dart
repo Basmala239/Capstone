@@ -1,8 +1,9 @@
-import 'package:capstone/features/home/student_home/presentation/view/home_view.dart';
 import 'package:capstone/resources/text_styles.dart';
 import 'package:capstone/widgets/custom_buttons.dart';
 import 'package:capstone/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../home/presentation/view/home_view.dart';
 class SetNewPasswordBody extends StatelessWidget {
   SetNewPasswordBody({super.key});
   final newPassword = TextEditingController();
@@ -19,7 +20,7 @@ class SetNewPasswordBody extends StatelessWidget {
             style: TextStyles.black30W600,),
             const SizedBox(height: 30,),
             CustomTextField(
-              ontap: (){
+              onTap: (){
                // Provider.of<SetNewPassword>(context,listen: false).changeHideNewPassword();
               },
               controller: newPassword, 
@@ -30,7 +31,7 @@ class SetNewPasswordBody extends StatelessWidget {
               ),
             const SizedBox(height: 20,),
             CustomTextField(
-              ontap: (){
+              onTap: (){
                 //Provider.of<SetNewPassword>(context,listen: false).changeHideConfirmPassword();
               },
               controller: confirmPassword, 

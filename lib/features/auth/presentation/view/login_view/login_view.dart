@@ -3,7 +3,8 @@ import 'package:capstone/features/auth/presentation/view/login_view/widgets/logi
 import 'package:flutter/material.dart';
 
 class LoginView extends StatelessWidget {
-  const LoginView({super.key});
+  const LoginView({super.key, required this.type});
+  final String type;
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,7 @@ class LoginView extends StatelessWidget {
       body: Stack(
         children: [
           Background(),
-          LoginViewBody(),
+          LoginViewBody(type: type,),
         ],
       )
       

@@ -4,6 +4,10 @@ import 'package:capstone/resources/text_styles.dart';
 import 'package:capstone/widgets/custom_buttons.dart';
 import 'package:capstone/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../data/repos/reset_passord_repo/reset_password_repository.dart';
+import '../../../model_view/reset_password_provider/reset_password_provider.dart';
 
 class ResetPasswordBody extends StatelessWidget {
   ResetPasswordBody({super.key});
@@ -26,24 +30,21 @@ class ResetPasswordBody extends StatelessWidget {
             ),),
             const SizedBox(height: 30,),
             CustomTextField(
-              ontap: (){
-                
-              },
               controller: email, 
               hint: 'Email',
-              // empty: Provider.of<ResetPassword>(context).isEmailEmpty(),
-              // wrong: Provider.of<ResetPassword>(context).isEmailWrong(),
+              errorText: Provider.of<ResetPassword>(context).isEmailEmpty()?'Required':(
+              Provider.of<ResetPassword>(context).isEmailWrong()?'Not Found':''),
             ),
             const SizedBox(height: 30,),
             CustomGeneralButton(
               text: 'Send Verification',
               onTap: (){
                 if(email.text==''){
-                  //Provider.of<ResetPassword>(context,listen: false).reset(-1);
-                }else if(email.text!='Basmala'){
-                  //Provider.of<ResetPassword>(context,listen: false).reset(0);
-
-                }else{
+                  Provider.of<ResetPassword>(context,listen: false).reset(-1);
+                }else {
+                  sendPasswordResetLink(email.text);
+                  // Provider.of<ResetPassword>(context,listen: false).reset(0);
+                  //
                   // Provider.of<ResetPassword>(context,listen: false).reset(1);
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>VerifyEmailView(email: email.text,)));
                 }
