@@ -11,7 +11,7 @@ import '../../../../profile/presentation/view/profile_view/profile_view.dart';
 import '../../../../report/presentation/view/last_reports/report_view.dart';
 import '../../../../schedule/presentation/view/schedule_view.dart';
 import '../../../../teams/presentation/pages/teams_screen.dart';
-import '../../../../user_management/presentation/view/user_view/user_view.dart';
+import '../../../../user_management/presentation/all_users/view/all_users_view.dart';
 import '../../../data/model/list_item.dart';
 import '../../../data/network/logout_api.dart';
 
@@ -86,8 +86,12 @@ Widget buildMenuItem(BuildContext context) {
             MaterialPageRoute(builder: (context) => TeamsScreen()));
       }),
       ItemModel(Icon(Icons.add_reaction_outlined), 'Add Users', () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => UserView()));
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => UserListView(token: userProvider.token ?? ''),
+          ),
+        );
       }),
       archiveItem,
       logoutItem,
@@ -95,7 +99,7 @@ Widget buildMenuItem(BuildContext context) {
   }
 
   // Supervisor menu
-  else if (user.userType == 'supervisor') {
+  else if (user.userType == 'super_visor') {
     list = [
       ItemModel(Icon(Icons.lightbulb_outline), 'Project', () {}),
       ItemModel(Icon(Icons.people_alt_outlined), 'Teams', () {

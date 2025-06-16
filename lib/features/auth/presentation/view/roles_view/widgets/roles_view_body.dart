@@ -8,7 +8,7 @@ class RolesViewBody extends StatelessWidget {
   RolesViewBody({super.key});
 
   final List <RoleCardModel> roles=[
-    RoleCardModel(image: AssetsManager.studentImage, role: 'user'),
+    RoleCardModel(image: AssetsManager.studentImage, role: 'student'),
     RoleCardModel(image: AssetsManager.staffImage, role: 'supervisor'),
     RoleCardModel(image: AssetsManager.adminImage, role: 'admin')
     ];

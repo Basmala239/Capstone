@@ -22,7 +22,7 @@ class Student extends AppUser {
     return Student(
       id: json['id'],
       email: json['email'],
-      studentName: json['student_name'],
+      studentName: json['name'],
       department: json['department'],
       year: json['year'],
       teamId: json['team_id'],
