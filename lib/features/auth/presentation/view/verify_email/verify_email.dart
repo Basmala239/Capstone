@@ -5,8 +5,10 @@ import 'package:capstone/features/auth/presentation/view/verify_email/widgets/ve
 import 'package:flutter/material.dart';
 
 class VerifyEmailView extends StatelessWidget {
-  const VerifyEmailView({super.key, required this.email});
+  const VerifyEmailView({super.key, required this.email, required this.code, required this.type});
   final String email;
+  final String code;
+  final String type;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +19,7 @@ class VerifyEmailView extends StatelessWidget {
       body:Stack(
         children: [
           Background(),
-          VerifyEmailBody(email: email),
+          VerifyEmailBody(email: email, code: code, type: type),
         ],
       )
        

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../data/models/admin_model/admin_model.dart';
-import '../../../data/repos/login_repository.dart';
-
 class LoginProvider with ChangeNotifier {
   String _usernameOrEmail = '';
   String _password = '';

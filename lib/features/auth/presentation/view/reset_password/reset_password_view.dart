@@ -4,8 +4,8 @@ import 'package:capstone/widgets/custom_back_button.dart';
 import 'package:capstone/features/auth/presentation/view/reset_password/widgets/reset_password_body.dart';
 import 'package:flutter/material.dart';
 class ResetPasswordView extends StatelessWidget {
-  const ResetPasswordView({super.key});
-
+  const ResetPasswordView({super.key, required this.type});
+  final String type;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +17,7 @@ class ResetPasswordView extends StatelessWidget {
       body:Stack(
         children: [
           Background(),
-          ResetPasswordBody(),
+          ResetPasswordBody(type: type),
         ],
       )
     );

@@ -3,9 +3,6 @@ import 'package:capstone/features/auth/data/models/roles_models/role_card_model.
 import 'package:capstone/features/auth/presentation/view/login_view/login_view.dart';
 import 'package:capstone/resources/text_styles.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../data/models/admin_model/admin_model.dart';
-
 Widget roleCard(RoleCardModel role, int index, BuildContext context){
   return GestureDetector(
     onTap: (){

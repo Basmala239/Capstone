@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../../resources/color_manager.dart';
 import '../../../../../resources/text_styles.dart';
+import '../../../../auth/presentation/model_view/user_provider/user_provider.dart';
 import '../../../data/model/project_model.dart';
 
-Widget buildProjectList(List<ProjectModel> projects){
-  return ListView.builder(
-      itemCount: projects.length
-      ,itemBuilder: (context,index)=>card(projects[index])
-  );
-}
-
-Widget card(ProjectModel project){
+Widget projectCard(Project project, BuildContext context){
   return Container(
     width: double.infinity,
     height: 270,
@@ -29,21 +24,13 @@ Widget card(ProjectModel project){
             CircleAvatar(
               backgroundColor: ColorManager.blueEC,
               radius: 30,
-              child:project.image!=null ?
-              Image.network(project.image!):
-              Text(project.name[0].toUpperCase(),
+              child:Text(project.title[0].toUpperCase(),
                 style: TextStyles.blue4D18w700,),
             ),
             const SizedBox(width: 10,),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(project.name,
+
+                Text(project.title,
                 style: TextStyles.black20W500,),
-                Text(project.supervisor)
-              ],
-            )
           ],
         ),
         const SizedBox(height: 10,),

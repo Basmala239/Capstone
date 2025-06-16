@@ -1,7 +1,5 @@
 import 'package:capstone/features/auth/presentation/view/login_view/login_view.dart';
-import 'package:capstone/features/report/presentation/view/report_view.dart';
 import 'package:capstone/features/task/presentation/view/pages/tasks_tabs_screen.dart';
-import 'package:capstone/features/user_management/presentation/view/add_user/add_user_view.dart';
 import 'package:capstone/resources/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +8,7 @@ import '../../../../archive/presentation/model_view/project_cubit.dart';
 import '../../../../archive/presentation/view/archive_view.dart';
 import '../../../../auth/presentation/model_view/user_provider/user_provider.dart';
 import '../../../../profile/presentation/view/profile_view/profile_view.dart';
+import '../../../../report/presentation/view/last_reports/report_view.dart';
 import '../../../../schedule/presentation/view/schedule_view.dart';
 import '../../../../teams/presentation/pages/teams_screen.dart';
 import '../../../../user_management/presentation/view/user_view/user_view.dart';
@@ -38,6 +37,7 @@ Widget buildMenuItem(BuildContext context) {
       .of<UserProvider>(context)
       .user;
   List<ItemModel> list = [];
+  final userProvider = Provider.of<UserProvider>(context, listen: false);
 
   if (user == null) return SizedBox(); // safeguard
 
@@ -55,8 +55,8 @@ Widget buildMenuItem(BuildContext context) {
 
     Navigator.push(
         context, MaterialPageRoute(builder: (context) =>
-        BlocProvider<ProjectCubit>(
-            create: (context) => ProjectCubit(),
+        BlocProvider(
+            create: (_) => ProjectCubit()..fetchProjects(userProvider.token ?? ''),
             child: ArchiveView())));
   });
 
@@ -111,8 +111,12 @@ Widget buildMenuItem(BuildContext context) {
             MaterialPageRoute(builder: (context) => TasksTabsScreen()));
       }),
       ItemModel(Icon(Icons.file_copy_outlined), 'Report', () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => ReportView()));
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ReportView(token: userProvider.token??''),
+          ),
+        );
       }),
       archiveItem,
       logoutItem,

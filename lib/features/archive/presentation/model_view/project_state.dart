@@ -1,14 +1,19 @@
 part of 'project_cubit.dart';
 
+abstract class ProjectState {}
 
-sealed class ProjectState {}
+class ProjectInitial extends ProjectState {}
 
-final class ProjectInitialState extends ProjectState {
-  final List<ProjectModel>projects;
-  ProjectInitialState(this.projects);
+class ProjectLoading extends ProjectState {}
+
+class ProjectLoaded extends ProjectState {
+  final List<Project> projects;
+
+  ProjectLoaded({required this.projects});
 }
 
-final class ProjectFilterState extends ProjectState {
-  final List<ProjectModel>filterProjects;
-  ProjectFilterState(this.filterProjects);
+class ProjectError extends ProjectState {
+  final String message;
+
+  ProjectError({required this.message});
 }

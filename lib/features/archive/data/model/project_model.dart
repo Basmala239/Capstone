@@ -1,18 +1,19 @@
-class ProjectModel{
-  String name;
-  String supervisor;
-  String description;
-  String? image;
-  ProjectModel({required this.name,required this.supervisor,required this.description,this.image});
+class Project {
+  final int id;
+  final String title;
+  final String description;
 
-  static List<ProjectModel>allProject=[
-    ProjectModel(name: 'Water_Quality', supervisor: 'Ahmed Saleh', description: 'auto-report about water quality description description description description description description description description description description description description description description description description description description description description description description description description description description description description'),
-    ProjectModel(name: 'e-commerce', supervisor: 'Rasha Montaser', description: 'online shopping description description description description description description description description description description description description description description description description description description description description description description description description description description description description'),
-    ProjectModel(name: 'dress shop', supervisor: 'Amer Shawish', description: 'dresses for wadding, description description description description description description description description description description description description description description description description description description description description description description description description description description description description'),
-    ProjectModel(name: 'mo-watches', supervisor: 'Ebtsam Adel', description: 'original watches description description description description description description description description description description description description description description description description description description description description description description description description description description description description'),
-    ProjectModel(name: 'bouquet', supervisor: 'Ahmed Saleh', description: 'you are a beautiful flower description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description'),
-    ProjectModel(name: 'animal world', supervisor: 'Rasha Montaser', description: 'description description description description description description description description description description description description description description description description description description description description description description description description description description description description'),
-    ProjectModel(name: 'car washer', supervisor: 'Amer Shawish', description: 'iifiejhfjgbjmcidhjsncmdkaoqpdjfnvkvfojfndjnjknjnkknknlbbbcgvbhjnkiifiejhfjgbjmcidhjsncmdkaoqpdjfnvkvfojfndjnjknjnkknknlbbbcgvbhjnkiifiejhfjgbjmcidhjsncmdkaoqpdjfnvkvfojfndjnjknjnkknknlbbbcgvbhjnkiifiejhfjgbjmcidhjsncmdkaoqpdjfnvkvfojfndjnjknjnkknknlbbbcgvbhjnkiifiejhfjgbjmcidhjsncmdkaoqpdjfnvkvfojfndjnjknjnkknknlbbbcgvbhjnkiifiejhfjgbjmcidhjsncmdkaoqpdjfnvkvfojfndjnjknjnkknknlbbbcgvbhjnkiifiejhfjgbjmcidhjsncmdkaoqpdjfnvkvfojfndjnjknjnkknknlbbbcgvbhjnk'),
-    ProjectModel(name: 'fire fighter', supervisor: 'Ebtsam Adel', description: 'auto-report about water quality description description description description description description description description description description description description description description description description description description description description description description description description description description description description'),
-  ];
+  Project({
+    required this.id,
+    required this.title,
+    required this.description,
+  });
+
+  factory Project.fromJson(Map<String, dynamic> json) {
+    return Project(
+      id: json['id'],
+      title: json['title'],
+      description: json['description'] ?? '',
+    );
+  }
 }

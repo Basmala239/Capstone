@@ -1,19 +1,25 @@
-import '../admin_model/admin_model.dart';
-import '../student_model/student_model.dart';
-import '../supervisor_model/supervisor_model.dart';
+class AppUser {
+  final int id;
+  final String? name;
+  final String email;
+  final String userType;
+  final int? teamId;
 
-abstract class AppUser {
-  int get id;
-  String get email;
-  String get userType;
-}
-AppUser parseUser(Map<String, dynamic> json) {
-  final type = json['user_type'];
+  AppUser({
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.userType,
+    this.teamId,
+  });
 
-  switch (type) {
-    case 'student': return Student.fromJson(json);
-    case 'admin': return Admin.fromJson(json);
-    case 'supervisor': return Supervisor.fromJson(json);
-    default: throw Exception('Unknown user $type');
+  factory AppUser.fromJson(Map<String, dynamic> json) {
+    return AppUser(
+      id: json['id'],
+      name: json['name'],
+      email: json['email'],
+      userType: json['user_type'],
+      teamId: json['team_id'],
+    );
   }
 }

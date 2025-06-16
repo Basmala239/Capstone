@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:capstone/features/auth/data/models/app_user/app_user_model.dart';
 import 'package:capstone/features/auth/data/models/supervisor_model/supervisor_model.dart';
 import 'package:capstone/features/auth/presentation/view/reset_password/reset_password_view.dart';
 import 'package:capstone/resources/color_manager.dart';
@@ -10,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import '../../../../../home/presentation/view/home_view.dart';
+import '../../../../../profile/data/repository/get_profile_repository/profile_repository.dart';
+import '../../../../../report/data/repository/get_last_reports_repository.dart';
 import '../../../../data/models/admin_model/admin_model.dart';
 import '../../../../data/models/login_response/login_response_model.dart';
 import '../../../../data/models/student_model/student_model.dart';
@@ -31,6 +34,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
   final TextEditingController _passwordController = TextEditingController();
   Future<void> _login() async {
     const url = 'https://dev.3bhady.com/api/v1/login';
+
     try {
       final response = await http.post(
         Uri.parse(url),
@@ -42,27 +46,35 @@ class _LoginViewBodyState extends State<LoginViewBody> {
 
       final Map<String, dynamic> jsonResponse = json.decode(response.body);
       print(jsonResponse);
-      print(jsonResponse['status']);
+
       if (jsonResponse['status'] == false) {
         Provider.of<LoginProvider>(context, listen: false).wrongType(jsonResponse['msg']);
         return;
       }
+
       final loginResponse = LoginResponse.fromJson(jsonResponse);
-      if(widget.type!=loginResponse.data.userType){
+      final userData = loginResponse.userData;
+      final user = userData.user;
+
+      if (widget.type != user.userType) {
         Provider.of<LoginProvider>(context, listen: false).wrongType('Not Found');
         return;
       }
 
       final userProvider = Provider.of<UserProvider>(context, listen: false);
-      userProvider.setUser(loginResponse.data.user,loginResponse.data.token);
-      final user = loginResponse.data.user;
-      if (user is Student|| user is Admin || user is Supervisor) {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeView()));
-      }
+      userProvider.setUser(await getProfile(userData.accessToken) as AppUser, userData.accessToken);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomeView()),
+      );
+      // await getLastReports(userProvider.token??'');
+      //  print (await getProfile(userProvider.token??'') as AppUser);
     } catch (e) {
+      print("Login error: $e");
       Provider.of<LoginProvider>(context, listen: false).wrongType('An error occurred. Please try again.');
     }
   }
+
   // @override
   // void dispose() {
   //   _emailController.dispose();
@@ -121,7 +133,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 const Spacer(),
                 TextButton(onPressed: () {
                   Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => ResetPasswordView()));
+                      builder: (context) => ResetPasswordView(type: widget.type)));
                 }, child: const Text('Forgot Password?',
                   style: TextStyles.gray18W400,))
               ],
@@ -140,14 +152,6 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   _login();
                 }
 
-
-                //   if (User.currentUser?.userType == widget.type) {
-                //     Navigator.pushReplacement(context, MaterialPageRoute(
-                //         builder: (context) => HomeView()));
-                //   } else {
-                //     Provider.of<LoginProvider>(context, listen: false)
-                //         .wrongType();
-                //   }
 
               },
             ),

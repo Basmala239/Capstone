@@ -27,4 +27,8 @@ class Admin implements AppUser {
       updatedAt: DateTime.parse(json['updated_at']),
     );
   }
+
+  @override
+  // TODO: implement teamId
+  int? get teamId => throw UnimplementedError();
 }

@@ -12,7 +12,7 @@ class ChatbotView extends StatelessWidget {
       body: Stack(
         children: [
           Background(),
-          ChatbotViewBody(),
+          ChatBotBody(),
         ],
       ),
     );

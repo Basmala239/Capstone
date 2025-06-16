@@ -4,6 +4,9 @@ import 'package:capstone/resources/assets_manager.dart';
 import 'package:capstone/resources/color_manager.dart';
 import 'package:capstone/resources/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../../auth/presentation/model_view/user_provider/user_provider.dart';
 
 Widget profileViewBody(BuildContext context) {
     return Center(
@@ -28,29 +31,16 @@ Widget profileViewBody(BuildContext context) {
               padding: const EdgeInsets.all(18.0),
               child: Column(
                 children: [
-                   GestureDetector(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>EditProfileView()));
-                    },
-                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text('Edited ',style: TextStyles.black20W500,),
-                        Icon(Icons.edit, color: ColorManager.black,)
-                      ],
-                    ),
-                   ),
                   SizedBox(height: 25,),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0),
-                    child:Image.asset(AssetsManager.studentProfileImage),
+                  ClipOval(
+                    child:Image.asset(AssetsManager.defaultProfileImage,width: 100,height: 100,fit: BoxFit.fill,),
                   ),
-                  Text('Mohamed Ahmed',
+                  Text(Provider.of<UserProvider>(context).user?.name ?? 'User Name',
                   style: TextStyles.gray18W400,),
-                  dataWidget('Name', 'Mohamed Ahmed'),
-                  dataWidget('Email', 'Mohamed Ahmed'),
-                  dataWidget('ID', 'Mohamed Ahmed'),
-                  dataWidget('Role', 'Mohamed Ahmed'),
+                  dataWidget('Name', Provider.of<UserProvider>(context).user?.name ?? 'User Name'),
+                  dataWidget('Email', Provider.of<UserProvider>(context).user?.email ??  'Email'),
+                  dataWidget('ID', Provider.of<UserProvider>(context).user?.id.toString() ??  'ID'),
+                  dataWidget('Role',Provider.of<UserProvider>(context).user?.userType ?? 'Role'),
                 ],
               ),
             ),

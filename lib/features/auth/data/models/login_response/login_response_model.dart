@@ -1,36 +1,16 @@
 import '../app_user/app_user_model.dart';
 
-class LoginData {
-  final String token;
-  final AppUser user;
-  final String userType;
-
-  LoginData({
-    required this.token,
-    required this.user,
-    required this.userType,
-  });
-
-  factory LoginData.fromJson(Map<String, dynamic> json) {
-    return LoginData(
-      token: json['token'],
-      userType: json['user_type'],
-      user: parseUser(json['user']),
-    );
-  }
-}
-
 class LoginResponse {
   final bool status;
   final String errNum;
   final String msg;
-  final LoginData data;
+  final LoginUserData userData;
 
   LoginResponse({
     required this.status,
     required this.errNum,
     required this.msg,
-    required this.data,
+    required this.userData,
   });
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) {
@@ -38,7 +18,30 @@ class LoginResponse {
       status: json['status'],
       errNum: json['errNum'],
       msg: json['msg'],
-      data: LoginData.fromJson(json['data']),
+      userData: LoginUserData.fromJson(json['user']),
+    );
+  }
+}
+
+class LoginUserData {
+  final String accessToken;
+  final String tokenType;
+  final int expiresIn;
+  final AppUser user;
+
+  LoginUserData({
+    required this.accessToken,
+    required this.tokenType,
+    required this.expiresIn,
+    required this.user,
+  });
+
+  factory LoginUserData.fromJson(Map<String, dynamic> json) {
+    return LoginUserData(
+      accessToken: json['access_token'],
+      tokenType: json['token_type'],
+      expiresIn: json['expires_in'],
+      user: AppUser.fromJson(json['user']),
     );
   }
 }

@@ -7,7 +7,7 @@ class Supervisor implements AppUser {
   final String name;
   final String department;
   final int maxTeamsAllowed;
-  final bool availability;
+  final int availability;
 
   Supervisor({
     required this.id,
@@ -30,4 +30,8 @@ class Supervisor implements AppUser {
       availability: json['availability'],
     );
   }
+
+  @override
+  // TODO: implement teamId
+  int? get teamId => throw UnimplementedError();
 }

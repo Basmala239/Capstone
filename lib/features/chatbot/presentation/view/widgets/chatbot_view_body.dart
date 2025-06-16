@@ -1,118 +1,98 @@
-import 'package:capstone/utils/network/consts.dart';
-import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
-import 'package:dash_chat_2/dash_chat_2.dart';
 import 'package:flutter/material.dart';
-import '../../../../../resources/color_manager.dart';
 
-class ChatbotViewBody extends StatefulWidget {
-  const ChatbotViewBody({super.key});
+import '../../../data/model/chat_message_model.dart';
+import '../../../data/repository/chatbot_repository.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
+class ChatBotBody extends StatefulWidget {
+  const ChatBotBody({super.key});
 
   @override
-  State<ChatbotViewBody> createState() => _ChatbotViewBodyState();
+  State<ChatBotBody> createState() => _ChatBotBodyState();
 }
 
-class _ChatbotViewBodyState extends State<ChatbotViewBody> {
-  final _opedAI = OpenAI.instance.build(token: OPENAI_API_KEY,
-      baseOption: HttpSetup(receiveTimeout: const Duration(seconds: 5,)),enableLog: true,);
+class _ChatBotBodyState extends State<ChatBotBody> {
 
-  final ChatUser _currentUser = ChatUser(
-      id: '1', firstName: 'Basmala', lastName: 'Ahmed');
-  final ChatUser _gptChatUser = ChatUser(
-      id: '2', firstName: 'Chat', lastName: 'GPT');
-  List<ChatMessage> _messages = <ChatMessage>[];
-  List<ChatUser> _typingUsers = <ChatUser>[];
-  bool useMockResponse = true; // Toggle this for testing
+  final TextEditingController _controller = TextEditingController();
+  final List<ChatMessage> _messages = [];
+
+  void _sendMessage() async {
+    final text = _controller.text.trim();
+    if (text.isEmpty) return;
+
+    setState(() {
+      _messages.add(ChatMessage(message: text, isUser: true));
+      _controller.clear();
+    });
+
+    final botReply = await sendChatMessage(text);
+
+    setState(() {
+      _messages.add(ChatMessage(message: botReply ?? 'No response', isUser: false));
+    });
+  }
+
+  Widget _buildMessage(ChatMessage msg) {
+    return Align(
+      alignment: msg.isUser ? Alignment.centerRight : Alignment.centerLeft,
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+        padding: EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: msg.isUser ? Colors.blue : Colors.grey[300],
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: msg.isUser
+            ? Text(
+          msg.message,
+          style: TextStyle(color: Colors.white),
+        )
+            : MarkdownBody(
+          data: msg.message,
+          styleSheet: MarkdownStyleSheet(
+            p: TextStyle(fontSize: 14),
+            strong: TextStyle(fontWeight: FontWeight.bold),
+            listBullet: TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return DashChat(
-        currentUser: _currentUser,
-        typingUsers: _typingUsers,
-        messageOptions: const MessageOptions(
-            currentUserContainerColor: ColorManager.blueFF,
-            containerColor: ColorManager.whiteop,
-            textColor: Colors.black
-        ),
-        onSend: (ChatMessage m) {
-          getChatResponse(m);
-        },
-        messages: _messages);
-  }
-  Future<void> getChatResponse(ChatMessage m) async {
-    print(m.text);
-    setState(() {
-      _messages.insert(0, m);
-      _typingUsers.add(_gptChatUser);
-    });
-
-    // Wait to simulate response time
-    await Future.delayed(const Duration(seconds: 1));
-
-    if (useMockResponse) {
-      // Mock response without calling API
-      setState(() {
-        _messages.insert(
-          0,
-          ChatMessage(
-            user: _gptChatUser,
-            createdAt: DateTime.now(),
-            text: "This is a mock response to: \"${m.text}\"",
+    return  Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              reverse: true,
+              padding: EdgeInsets.all(8),
+              itemCount: _messages.length,
+              itemBuilder: (context, index) => _buildMessage(_messages[_messages.length - 1 - index]),
+            ),
           ),
-        );
-        _typingUsers.remove(_gptChatUser);
-      });
-      return;
-    }
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _controller,
+                    decoration: InputDecoration(
+                      hintText: 'Ask about your project idea...',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.send),
+                  onPressed: _sendMessage,
+                  color: Colors.blue,
+                )
+              ],
+            ),
+          )
+        ],
 
-    // Actual API call (will only run if useMockResponse = false)
-    List<Map<String, dynamic>> _messagesHistory = _messages.reversed.map((m) {
-      if (m.user == _currentUser) {
-        return Messages(role: Role.user, content: m.text).toJson();
-      } else {
-        return Messages(role: Role.assistant, content: m.text).toJson();
-      }
-    }).toList();
-
-    final request = ChatCompleteText(
-      model: GptTurboChatModel(),
-      messages: _messagesHistory,
-      maxToken: 200,
     );
-
-    try {
-      final response = await _opedAI.onChatCompletion(request: request);
-      for (var element in response!.choices) {
-        if (element.message != null) {
-          setState(() {
-            _messages.insert(
-              0,
-              ChatMessage(
-                user: _gptChatUser,
-                createdAt: DateTime.now(),
-                text: element.message!.content,
-              ),
-            );
-          });
-        }
-      }
-    } catch (e) {
-      print("API error: $e");
-      setState(() {
-        _messages.insert(
-          0,
-          ChatMessage(
-            user: _gptChatUser,
-            createdAt: DateTime.now(),
-            text: "⚠️ API Error: Unable to get response.",
-          ),
-        );
-      });
-    }
-
-    setState(() {
-      _typingUsers.remove(_gptChatUser);
-    });
   }
-
-
 }

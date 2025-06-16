@@ -4,8 +4,10 @@ import 'package:capstone/widgets/custom_back_button.dart';
 import 'package:capstone/features/auth/presentation/view/set_new_password_view.dart/widget/set_new_password_body.dart';
 import 'package:flutter/material.dart';
 class SetNewPasswordView extends StatelessWidget {
-  const SetNewPasswordView({super.key});
-
+  const SetNewPasswordView({super.key, required this.email, required this.code, required this.type});
+  final String email;
+  final String code;
+  final String type;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +18,7 @@ class SetNewPasswordView extends StatelessWidget {
       body: Stack(
         children:[
           Background(),
-          SetNewPasswordBody()
+          SetNewPasswordBody(email: email,code: code,type: type)
         ]),
     );
   }

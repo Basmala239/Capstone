@@ -11,10 +11,8 @@ class AssetsManager {
   static const String adminImage='$imagePath/admin.png'; 
   static const String backgroundImage='$imagePath/background.png'; 
   static const String chatbotImage='$imagePath/ai.png'; 
-  static const String studentProfileImage='$imagePath/ahmed.png';
-  static const String adminProfileImage='$imagePath/ali.png';
-  static const String supervisorProfileImage='$imagePath/hassan.png';
-  
+  static const String defaultProfileImage='$imagePath/default.jpg';
+
   //icons
   static const String logoIcon='$iconPath/logo.svg'; 
 
