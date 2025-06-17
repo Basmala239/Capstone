@@ -17,13 +17,10 @@ Future<String> sendChatMessage(String question) async {
 
   if (response.statusCode == 200) {
     final data = jsonDecode(response.body);
-    print('Response: ${data['response']}');
     return data['response'];
   } else if (response.statusCode == 422) {
-    print('Validation Error: ${response.body}');
     return 'Validation Error: ${response.body}';
   } else {
-    print('Error ${response.statusCode}: ${response.body}');
     return 'Error ${response.statusCode}: ${response.body}';
   }
 }

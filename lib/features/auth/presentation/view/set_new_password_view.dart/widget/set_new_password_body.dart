@@ -3,8 +3,6 @@ import 'package:capstone/widgets/custom_buttons.dart';
 import 'package:capstone/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../../../../home/presentation/view/home_view.dart';
 import '../../../../data/repos/set_new_password_repo/set_new_password_repository.dart';
 import '../../../model_view/set_new_password_provider/set_new_password_provider.dart';
 import '../../login_view/login_view.dart';
@@ -60,7 +58,7 @@ class SetNewPasswordBody extends StatelessWidget {
                   .isShowConfirmPassword(),
             ),
             const SizedBox(height: 20,),
-            CustomGeneralButton(text: 'Confirm Password', onTap: () {
+            CustomGeneralButton(text: 'Confirm Password', onTap: () async {
               if (newPassword.text.trim() == '') {
                 Provider.of<SetNewPassword>(context, listen: false).reset(
                     -1, 1);
@@ -72,14 +70,18 @@ class SetNewPasswordBody extends StatelessWidget {
                 Provider.of<SetNewPassword>(context, listen: false).reset(0, 0);
               } else {
                 Provider.of<SetNewPassword>(context, listen: false).reset(1, 1);
-                resetPassword(
+                 if(await resetPassword(
                   email: email,
                   code: code,
                   password: newPassword.text.trim(),
                   passwordConfirmation: confirmPassword.text.trim(),
-                );
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => LoginView(type: type,)));
+                )) {
+                   Navigator.push(context,
+                       MaterialPageRoute(
+                           builder: (context) => LoginView(type: type,)));
+                 }else{
+                   print('not forget snake bar');
+                 }
               }
             },)
           ],

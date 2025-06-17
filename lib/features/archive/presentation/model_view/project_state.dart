@@ -7,7 +7,7 @@ class ProjectInitial extends ProjectState {}
 class ProjectLoading extends ProjectState {}
 
 class ProjectLoaded extends ProjectState {
-  final List<Project> projects;
+  final List<ProjectModel> projects;
 
   ProjectLoaded({required this.projects});
 }

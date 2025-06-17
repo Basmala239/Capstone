@@ -27,7 +27,7 @@ class HomeView extends StatelessWidget {
             StudentHomeViewBody(),
           if(Provider.of<UserProvider>(context, listen: false).user?.userType=='admin')
             AdminHomeViewBody(),
-          if(Provider.of<UserProvider>(context, listen: false).user?.userType=='super_visor')
+          if(Provider.of<UserProvider>(context, listen: false).user?.userType=='supervisor')
             SupervisorHomeViewBody(),
         ],
       ),

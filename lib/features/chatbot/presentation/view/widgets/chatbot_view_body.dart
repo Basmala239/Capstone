@@ -1,57 +1,38 @@
 import 'package:flutter/material.dart';
-
-import '../../../data/model/chat_message_model.dart';
-import '../../../data/repository/chatbot_repository.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-class ChatBotBody extends StatefulWidget {
-  const ChatBotBody({super.key});
+import '../../../data/model/chat_message_model.dart';
+import '../../model_view/chat_cubit.dart';
 
-  @override
-  State<ChatBotBody> createState() => _ChatBotBodyState();
-}
-
-class _ChatBotBodyState extends State<ChatBotBody> {
-
+class ChatBotBody extends StatelessWidget {
+  ChatBotBody({super.key});
   final TextEditingController _controller = TextEditingController();
-  final List<ChatMessage> _messages = [];
 
-  void _sendMessage() async {
+  void _send(BuildContext context) {
     final text = _controller.text.trim();
     if (text.isEmpty) return;
-
-    setState(() {
-      _messages.add(ChatMessage(message: text, isUser: true));
-      _controller.clear();
-    });
-
-    final botReply = await sendChatMessage(text);
-
-    setState(() {
-      _messages.add(ChatMessage(message: botReply ?? 'No response', isUser: false));
-    });
+    context.read<ChatCubit>().sendMessage(text);
+    _controller.clear();
   }
 
   Widget _buildMessage(ChatMessage msg) {
     return Align(
       alignment: msg.isUser ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-        padding: EdgeInsets.all(12),
+        margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+        padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: msg.isUser ? Colors.blue : Colors.grey[300],
           borderRadius: BorderRadius.circular(12),
         ),
         child: msg.isUser
-            ? Text(
-          msg.message,
-          style: TextStyle(color: Colors.white),
-        )
+            ? Text(msg.message, style: const TextStyle(color: Colors.white))
             : MarkdownBody(
           data: msg.message,
           styleSheet: MarkdownStyleSheet(
-            p: TextStyle(fontSize: 14),
-            strong: TextStyle(fontWeight: FontWeight.bold),
-            listBullet: TextStyle(fontWeight: FontWeight.bold),
+            p: const TextStyle(fontSize: 14),
+            strong: const TextStyle(fontWeight: FontWeight.bold),
+            listBullet: const TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
       ),
@@ -60,39 +41,44 @@ class _ChatBotBodyState extends State<ChatBotBody> {
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              reverse: true,
-              padding: EdgeInsets.all(8),
-              itemCount: _messages.length,
-              itemBuilder: (context, index) => _buildMessage(_messages[_messages.length - 1 - index]),
-            ),
+    return Column(
+      children: [
+        Expanded(
+          child: BlocBuilder<ChatCubit, ChatState>(
+            builder: (context, state) {
+              final messages = state is ChatUpdated ? state.messages : [];
+              return ListView.builder(
+                reverse: true,
+                padding: const EdgeInsets.all(8),
+                itemCount: messages.length,
+                itemBuilder: (context, index) =>
+                    _buildMessage(messages[messages.length - 1 - index]),
+              );
+            },
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _controller,
-                    decoration: InputDecoration(
-                      hintText: 'Ask about your project idea...',
-                      border: OutlineInputBorder(),
-                    ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+          child: Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: _controller,
+                  decoration: const InputDecoration(
+                    hintText: 'Ask about your project idea...',
+                    border: OutlineInputBorder(),
                   ),
                 ),
-                IconButton(
-                  icon: Icon(Icons.send),
-                  onPressed: _sendMessage,
-                  color: Colors.blue,
-                )
-              ],
-            ),
-          )
-        ],
-
+              ),
+              IconButton(
+                icon: const Icon(Icons.send),
+                onPressed: () => _send(context),
+                color: Colors.blue,
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

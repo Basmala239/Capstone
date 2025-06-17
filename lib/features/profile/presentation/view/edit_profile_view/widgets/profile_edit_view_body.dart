@@ -1,4 +1,3 @@
-import 'package:capstone/features/profile/presentation/view/profile_view/profile_view.dart';
 import 'package:capstone/resources/color_manager.dart';
 import 'package:capstone/widgets/custom_buttons.dart';
 import 'package:capstone/widgets/custom_text_field.dart';
@@ -15,20 +14,18 @@ class ProfileEditViewBody extends StatefulWidget {
 
 class _ProfileEditViewBodyState extends State<ProfileEditViewBody> {
   late TextEditingController nameController;
-  late TextEditingController emailController;
+  late final UserProvider userProvider;
 
   @override
   void initState() {
     super.initState();
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    userProvider = Provider.of<UserProvider>(context, listen: false);
     nameController = TextEditingController(text: userProvider.user?.name ?? 'User Name');
-    emailController = TextEditingController(text: userProvider.user?.email ?? 'Email');
   }
 
   @override
   void dispose() {
     nameController.dispose();
-    emailController.dispose();
     super.dispose();
   }
 
@@ -38,8 +35,6 @@ class _ProfileEditViewBodyState extends State<ProfileEditViewBody> {
       children: [
         const SizedBox(height: 20),
         CustomTextField(controller: nameController, hint: 'Name', color: ColorManager.whiteop),
-        const SizedBox(height: 10),
-        CustomTextField(controller: emailController, hint: 'Email', color: ColorManager.whiteop),
         const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -59,7 +54,7 @@ class _ProfileEditViewBodyState extends State<ProfileEditViewBody> {
                 await updateProfile(
                   token: Provider.of<UserProvider>(context, listen: false).token ?? '',
                   name: nameController.text.trim(),
-                  email: emailController.text.trim(),
+                  email:  userProvider.user?.email ?? 'Email',
                 );
               },
               editwidth: 130,

@@ -1,33 +1,65 @@
 import '../app_user/app_user_model.dart';
 
-class Student extends AppUser {
-  final String studentName;
+class Student implements AppUser {
+  @override
+  final int id;
+  @override
+  final String userType;
+  @override
+  final String name;
+  @override
+  final String email;
+  final String? github;
   final String department;
   final String year;
-  final int? teamId;
-  final bool availability;
+  final int teamId;
+  final int availability;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
   Student({
-    required int id,
-    required String email,
-    required this.studentName,
+    required this.id,
+    required this.userType,
+    required this.name,
+    required this.email,
+    this.github,
     required this.department,
     required this.year,
-    this.teamId,
+    required this.teamId,
     required this.availability,
-    required String userType,
-  }) : super(name:studentName,id: id, email: email, userType: userType);
+    required this.createdAt,
+    required this.updatedAt,
+  });
 
   factory Student.fromJson(Map<String, dynamic> json) {
     return Student(
       id: json['id'],
+      userType: json['user_type'],
+      name: json['name'],
       email: json['email'],
-      studentName: json['name'],
+      github: json['github'],
       department: json['department'],
       year: json['year'],
       teamId: json['team_id'],
-      availability: json['availability'] == 1,
-      userType: json['user_type'],
+      availability: json['availability'],
+      createdAt: DateTime.parse(json['created_at']),
+      updatedAt: DateTime.parse(json['updated_at']),
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'user_type': userType,
+      'name': name,
+      'email': email,
+      'github': github,
+      'department': department,
+      'year': year,
+      'team_id': teamId,
+      'availability': availability,
+      'created_at': createdAt.toIso8601String(),
+      'updated_at': updatedAt.toIso8601String(),
+    };
   }
 }

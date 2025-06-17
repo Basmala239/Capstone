@@ -3,14 +3,12 @@ class AppUser {
   final String? name;
   final String email;
   final String userType;
-  final int? teamId;
 
   AppUser({
     required this.id,
     required this.name,
     required this.email,
-    required this.userType,
-    this.teamId,
+    required this.userType
   });
 
   factory AppUser.fromJson(Map<String, dynamic> json) {
@@ -18,8 +16,7 @@ class AppUser {
       id: json['id'],
       name: json['name'],
       email: json['email'],
-      userType: json['user_type'],
-      teamId: json['team_id'],
+      userType: json['user_type']
     );
   }
 }

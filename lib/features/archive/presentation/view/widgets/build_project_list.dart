@@ -1,12 +1,12 @@
+import 'package:capstone/features/archive/presentation/view/view_project_details/project_details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../../../../resources/color_manager.dart';
 import '../../../../../resources/text_styles.dart';
 import '../../../../auth/presentation/model_view/user_provider/user_provider.dart';
-import '../../../data/model/project_model.dart';
+import '../../../../teams/data/models/project_model.dart';
 
-Widget projectCard(Project project, BuildContext context){
+Widget projectCard(ProjectModel project, BuildContext context){
   return Container(
     width: double.infinity,
     height: 270,
@@ -24,12 +24,12 @@ Widget projectCard(Project project, BuildContext context){
             CircleAvatar(
               backgroundColor: ColorManager.blueEC,
               radius: 30,
-              child:Text(project.title[0].toUpperCase(),
+              child:Text(project.name[0].toUpperCase(),
                 style: TextStyles.blue4D18w700,),
             ),
             const SizedBox(width: 10,),
 
-                Text(project.title,
+                Text(project.name,
                 style: TextStyles.black20W500,),
           ],
         ),
@@ -45,7 +45,9 @@ Widget projectCard(Project project, BuildContext context){
                 fixedSize: WidgetStatePropertyAll(Size.fromHeight(40)),
                 backgroundColor: WidgetStatePropertyAll(ColorManager.blueEo)
               ),
-                onPressed: (){}, child: Text("See More",
+                onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> ProjectDetailsView(token: Provider.of<UserProvider>(context, listen: false).token??'',id: project.id,)));
+                }, child: Text("See More",
             style: TextStyles.white18w400
             ))
           ],

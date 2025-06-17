@@ -1,4 +1,5 @@
 import 'package:capstone/features/auth/presentation/view/login_view/login_view.dart';
+import 'package:capstone/features/task/presentation/view/pages/tasks_list_screen.dart';
 import 'package:capstone/features/task/presentation/view/pages/tasks_tabs_screen.dart';
 import 'package:capstone/resources/color_manager.dart';
 import 'package:flutter/material.dart';
@@ -93,13 +94,13 @@ Widget buildMenuItem(BuildContext context) {
           ),
         );
       }),
+
       archiveItem,
       logoutItem,
     ];
   }
-
   // Supervisor menu
-  else if (user.userType == 'super_visor') {
+  else if (user.userType == 'supervisor') {
     list = [
       ItemModel(Icon(Icons.lightbulb_outline), 'Project', () {}),
       ItemModel(Icon(Icons.people_alt_outlined), 'Teams', () {
@@ -110,9 +111,10 @@ Widget buildMenuItem(BuildContext context) {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => ScheduleView()));
       }),
+
       ItemModel(Icon(Icons.task_outlined), 'Tasks', () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => TasksTabsScreen()));
+            MaterialPageRoute(builder: (context) => TasksListScreen()));
       }),
       ItemModel(Icon(Icons.file_copy_outlined), 'Report', () {
         Navigator.push(

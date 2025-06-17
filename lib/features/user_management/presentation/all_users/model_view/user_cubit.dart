@@ -19,6 +19,7 @@ class UserCubit extends Cubit<UserState> {
       );
 
       final body = jsonDecode(res.body);
+      print('users : {$body}');
       final List<AppUser> users = (body['users'] as List)
           .map((e) => AppUser.fromJson(e))
           .toList();

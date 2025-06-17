@@ -11,15 +11,17 @@ class CustomTextField extends StatelessWidget {
     this.isPassword = false,
     this.obscureText = false,
     this.textInputType = TextInputType.text,
-    this.errorText= "",
-    this.color=ColorManager.white
+    this.errorText,
+    this.color=ColorManager.white,
+    this.onChanged
     });
 
   final TextEditingController controller;
   final String hint;
-  final String errorText;
+  final String? errorText;
   final bool isPassword;
   final VoidCallback? onTap;
+  final ValueChanged<String>? onChanged;
   bool obscureText;
   final TextInputType textInputType;
   final Color color;
@@ -43,6 +45,7 @@ class CustomTextField extends StatelessWidget {
             height: 50,
             width: 363*SizeConfig.horizontalBlock,
             child: TextField(
+              onChanged: onChanged,
               keyboardType: textInputType, 
               controller: controller,
               obscureText: obscureText,
@@ -58,15 +61,15 @@ class CustomTextField extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 5,),
-
+        const SizedBox(height: 3,),
         //errors
-        Text(errorText,
+        Text(errorText ?? '',
         style: const TextStyle(
           color: Colors.red,
           fontSize: 13,
           fontWeight: FontWeight.w400
-        ),)
+        ),),
+        const SizedBox(height: 3,),
       ],
     );
   }

@@ -3,6 +3,7 @@ import '../app_user/app_user_model.dart';
 class Admin implements AppUser {
   @override final int id;
   @override final String userType;
+  @override
   final String name;
   @override final String email;
   final DateTime createdAt;
@@ -27,8 +28,4 @@ class Admin implements AppUser {
       updatedAt: DateTime.parse(json['updated_at']),
     );
   }
-
-  @override
-  // TODO: implement teamId
-  int? get teamId => throw UnimplementedError();
 }

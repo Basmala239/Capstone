@@ -1,4 +1,3 @@
-import 'package:capstone/features/archive/data/model/project_model.dart';
 import 'package:capstone/features/archive/presentation/model_view/project_cubit.dart';
 import 'package:capstone/resources/color_manager.dart';
 import 'package:flutter/material.dart';

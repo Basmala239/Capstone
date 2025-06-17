@@ -1,8 +1,7 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 
-Future<void> resetPassword({
+Future<bool> resetPassword({
   required String email,
   required String code,
   required String password,
@@ -25,9 +24,9 @@ Future<void> resetPassword({
   );
 
   if (response.statusCode == 200) {
-    print("Password reset successful.");
+    return true;
   } else {
-    print("Failed to reset password: ${response.body}");
+    return false;
   }
 
 }

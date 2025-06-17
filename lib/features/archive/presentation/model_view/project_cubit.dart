@@ -2,14 +2,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import '../../data/model/project_model.dart';
+import '../../../teams/data/models/project_model.dart';
+
 
 part 'project_state.dart';
 
 class ProjectCubit extends Cubit<ProjectState> {
   ProjectCubit() : super(ProjectInitial());
 
-  List<Project> _allProjects = [];
+  List<ProjectModel> _allProjects = [];
 
   Future<void> fetchProjects(String token) async {
     emit(ProjectLoading());
@@ -23,7 +24,7 @@ class ProjectCubit extends Cubit<ProjectState> {
       );
       final data = jsonDecode(res.body);
       _allProjects = (data['projects'] as List)
-          .map((e) => Project.fromJson(e))
+          .map((e) => ProjectModel.fromJson(e))
           .toList();
       emit(ProjectLoaded(projects: _allProjects));
     } catch (e) {
@@ -36,9 +37,10 @@ class ProjectCubit extends Cubit<ProjectState> {
       emit(ProjectLoaded(projects: _allProjects));
     } else {
       final filtered = _allProjects
-          .where((p) => p.title.toLowerCase().contains(query.toLowerCase()))
+          .where((p) => p.name.toLowerCase().contains(query.toLowerCase()))
           .toList();
       emit(ProjectLoaded(projects: filtered));
     }
   }
 }
+

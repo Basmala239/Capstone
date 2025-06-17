@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:capstone/features/auth/data/models/app_user/app_user_model.dart';
-import 'package:capstone/features/auth/data/models/supervisor_model/supervisor_model.dart';
 import 'package:capstone/features/auth/presentation/view/reset_password/reset_password_view.dart';
 import 'package:capstone/resources/color_manager.dart';
 import 'package:capstone/resources/text_styles.dart';
@@ -12,10 +10,7 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import '../../../../../home/presentation/view/home_view.dart';
 import '../../../../../profile/data/repository/get_profile_repository/profile_repository.dart';
-import '../../../../../report/data/repository/get_last_reports_repository.dart';
-import '../../../../data/models/admin_model/admin_model.dart';
 import '../../../../data/models/login_response/login_response_model.dart';
-import '../../../../data/models/student_model/student_model.dart';
 import '../../../model_view/login_provider/Login_provider.dart';
 import '../../../model_view/user_provider/user_provider.dart';
 
@@ -67,8 +62,6 @@ class _LoginViewBodyState extends State<LoginViewBody> {
         context,
         MaterialPageRoute(builder: (context) => HomeView()),
       );
-      // await getLastReports(userProvider.token??'');
-      //  print (await getProfile(userProvider.token??'') as AppUser);
     } catch (e) {
       print("Login error: $e");
       Provider.of<LoginProvider>(context, listen: false).wrongType('An error occurred. Please try again.');

@@ -1,4 +1,3 @@
-import 'package:capstone/features/profile/presentation/view/edit_profile_view/edit_profile_view.dart';
 import 'package:capstone/features/profile/presentation/view/profile_view/widgets/data_widget.dart';
 import 'package:capstone/resources/assets_manager.dart';
 import 'package:capstone/resources/color_manager.dart';

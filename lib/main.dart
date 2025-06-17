@@ -9,7 +9,6 @@ import 'features/auth/presentation/model_view/user_provider/user_provider.dart';
 import 'features/auth/presentation/model_view/verify_email/verify_email_provider.dart';
 import 'features/splash/presentation/view/splash_view.dart';
 
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -38,7 +37,7 @@ class MyApp extends StatelessWidget {
       //home: TasksListScreen(),
      // home: Test(),
       home: SplashView(),
-     // home: ReportView(),
+      //home: AddUserView(),
     ));
   }
 }

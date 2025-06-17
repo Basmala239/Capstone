@@ -17,7 +17,7 @@ class TeamsService {
         id: '1',
         name: 'Team Alpha',
         project: ProjectModel(
-          id: 'p1',
+          id: 1,
           name: 'Project Alpha',
           description: 'A comprehensive mobile application for managing graduation projects with advanced features for students, supervisors, and administrators.',
         ),
@@ -72,7 +72,7 @@ class TeamsService {
         id: '2',
         name: 'Team Beta',
         project: ProjectModel(
-          id: 'p2',
+          id: 2,
           name: 'Project Beta',
           description: 'An innovative e-learning platform designed to enhance the educational experience through interactive content and real-time collaboration.',
         ),
@@ -106,7 +106,7 @@ class TeamsService {
         id: '3',
         name: 'Team Gamma',
         project: ProjectModel(
-          id: 'p3',
+          id: 3,
           name: 'Project Gamma',
           description: 'A smart IoT-based home automation system that integrates various devices for enhanced security and energy efficiency.',
         ),
@@ -133,7 +133,7 @@ class TeamsService {
         id: '4',
         name: 'Team Delta',
         project: ProjectModel(
-          id: 'p4',
+          id: 4,
           name: 'Project Delta',
           description: 'A cloud-based document collaboration tool.',
         ),
@@ -158,7 +158,7 @@ class TeamsService {
         id: '5',
         name: 'Team Epsilon',
         project: ProjectModel(
-          id: 'p5',
+          id: 5,
           name: 'Project Epsilon',
           description: 'A smart agriculture monitoring system.',
         ),
@@ -183,7 +183,7 @@ class TeamsService {
         id: '6',
         name: 'Team Zeta',
         project: ProjectModel(
-          id: 'p6',
+          id: 6,
           name: 'Project Zeta',
           description: 'A real-time translation chat app.',
         ),
@@ -208,7 +208,7 @@ class TeamsService {
         id: '7',
         name: 'Team Eta',
         project: ProjectModel(
-          id: 'p7',
+          id: 7,
           name: 'Project Eta',
           description: 'A blockchain-based voting system.',
         ),
@@ -233,7 +233,7 @@ class TeamsService {
         id: '8',
         name: 'Team Theta',
         project: ProjectModel(
-          id: 'p8',
+          id: 8,
           name: 'Project Theta',
           description: 'A virtual reality education platform.',
         ),
@@ -258,7 +258,7 @@ class TeamsService {
         id: '9',
         name: 'Team Iota',
         project: ProjectModel(
-          id: 'p9',
+          id: 9,
           name: 'Project Iota',
           description: 'A smart parking management system.',
         ),
@@ -283,7 +283,7 @@ class TeamsService {
         id: '10',
         name: 'Team Kappa',
         project: ProjectModel(
-          id: 'p10',
+          id: 10,
           name: 'Project Kappa',
           description: 'A fitness and health tracking mobile app.',
         ),

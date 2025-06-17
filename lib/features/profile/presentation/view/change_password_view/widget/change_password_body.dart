@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../../../../../resources/color_manager.dart';
 import '../../../../../../widgets/custom_buttons.dart';
 import '../../../../../../widgets/custom_text_field.dart';
 import '../../../../../auth/presentation/model_view/user_provider/user_provider.dart';
 import '../../../../data/repository/change_pasword_repository/change_password_repository.dart';
-import '../../profile_view/profile_view.dart';
 class ChangePasswordBody extends StatefulWidget {
   const ChangePasswordBody({super.key});
 

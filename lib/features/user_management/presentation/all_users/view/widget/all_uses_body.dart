@@ -1,8 +1,6 @@
 import 'package:capstone/features/user_management/presentation/all_users/view/widget/view_user_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../../../resources/color_manager.dart';
 import '../../model_view/user_cubit.dart';
 import '../../model_view/user_state.dart';
 
@@ -22,7 +20,7 @@ class UserListBody extends StatelessWidget {
             itemCount: state.users.length,
             itemBuilder: (context, index) {
               final user = state.users[index];
-              return userCard(user);
+              return userCard(user, context, token);
             },
           );
         } else if (state is UserError) {
