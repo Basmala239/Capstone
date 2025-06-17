@@ -16,7 +16,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print("home view :${Provider.of<UserProvider>(context, listen: false).user?.userType}");
-
+   // fetchTaskCompletionDistribution(Provider.of<UserProvider>(context, listen: false).token ?? '');
     return Scaffold(
       appBar: buildAppBar(context),
       body: Stack(

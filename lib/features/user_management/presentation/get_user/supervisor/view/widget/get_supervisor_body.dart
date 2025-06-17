@@ -2,6 +2,7 @@ import 'package:capstone/features/auth/data/models/supervisor_model/supervisor_m
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../../../auth/presentation/model_view/user_provider/user_provider.dart';
+import '../../../../../../profile/presentation/view/profile_view/widgets/data_widget.dart';
 import '../../../../../data/repository/get_supervisor_repository/get_supervisor_repository.dart';
 
 class GetSupervisorBody extends StatelessWidget {
@@ -10,7 +11,9 @@ class GetSupervisorBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final token = Provider.of<UserProvider>(context, listen: false).token ?? '';
+    final token = Provider
+        .of<UserProvider>(context, listen: false)
+        .token ?? '';
 
     return FutureBuilder<Supervisor>(
       future: getSupervisor(token, id),
@@ -24,21 +27,22 @@ class GetSupervisorBody extends StatelessWidget {
         }
 
         final user = snapshot.data!;
-        return Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('🆔 ID: ${user.id}'),
-              Text('👤 Name: ${user.name}'),
-              Text('📧 Email: ${user.email}'),
-              Text('🧩 Type: ${user.userType}'),
-              Text('🧩 Type: ${user.department}'),
-              Text('📅 Created: ${user.createdAt}'),
-              Text('🕓 Updated: ${user.updatedAt}'),
-            ],
-          ),
-        );
+        return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  dataWidget('ID', user.id.toString()),
+                  dataWidget('Name', user.name),
+                  dataWidget('Email', user.email),
+                  dataWidget('Type', user.userType),
+                  dataWidget('Department', user.department),
+                  dataWidget('Created', user.createdAt.toString()),
+                  dataWidget('Updated', user.updatedAt.toString()),
+                ],
+              ),
+            ));
       },
     );
   }

@@ -1,9 +1,9 @@
 import 'package:capstone/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../../../widgets/custom_buttons.dart';
 import '../../../../data/repository/add_user_repository/add_user_repasitory.dart';
+import '../../../all_users/view/all_users_view.dart';
 import '../../model_view/add_user_cubit.dart';
 class AddUserBody extends StatelessWidget {
   AddUserBody({super.key,required this.token});
@@ -17,6 +17,7 @@ class AddUserBody extends StatelessWidget {
   final _yearController = TextEditingController();
   final _teamIdController = TextEditingController();
   final _maxTeamsAllowedController = TextEditingController();
+  final _availabilityController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +92,11 @@ class AddUserBody extends StatelessWidget {
                   controller: _maxTeamsAllowedController,
                   hint: 'Max Teams Allowed',
                   onChanged: (val) => cubit.updateField('maxTeamsAllowed', val),
+                ),if (state.role == 'supervisor')
+                CustomTextField(
+                  controller: _availabilityController,
+                  hint: 'Availability',
+                  onChanged: (val) => cubit.updateField('availability', val),
                 ),
               SizedBox(height: 15,),
               Row(
@@ -108,6 +114,8 @@ class AddUserBody extends StatelessWidget {
                       _yearController.clear();
                       _teamIdController.clear();
                       _maxTeamsAllowedController.clear();
+                      _availabilityController.clear();
+                      Navigator.pop(context);
                     },
                     editwidth: 130,
                     editheight: 40,
@@ -118,18 +126,32 @@ class AddUserBody extends StatelessWidget {
                     onTap: () async {
                       cubit.validateForm();
                       if (context.read<AddUserCubit>().state.errors.isEmpty) {
-                        await addUser(
+
+                        if(await addUser(
                         token: token,
-                        name: 'Basmala Abuzied',
-                        email: 'abuziedbasmala@gmail.com',
-                        password: '12345678',
-                        userType: 'student',
-                        teamId: '1',
-                        github: 'https://github.com/Basmala239',
-                        department: 'CS',
-                        year: '2021',
-                        studentName: 'Basmala',
-                        );
+                        name: _nameController.text.trim(),
+                        email: _emailController.text.trim(),
+                        password: _passwordController.text.trim(),
+                        userType: state.role ?? 'student',
+                        teamId: _teamIdController.text.trim(),
+                        github: _githubController.text.trim(),
+                        department: _departmentController.text.trim(),
+                        year: _yearController.text.trim(),
+                        studentName: _nameController.text.trim(),
+                        maxTeamsAllowed: _maxTeamsAllowedController.text.trim(),
+                        availability: _availabilityController.text.trim()
+                        )){
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>UserListView(token: token,)));
+                        }else{
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Server Error'),
+                              duration: Duration(seconds: 2),
+                            ),
+                          );
+                        }
 
                         print("Form is valid, submit data");
                       }

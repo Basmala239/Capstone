@@ -10,6 +10,7 @@ class AddUserState {
   final String year;
   final String teamId;
   final String maxTeamsAllowed;
+  final String availability;
 
   final Map<String, String?> errors;
 
@@ -23,6 +24,7 @@ class AddUserState {
     this.year = '',
     this.teamId = '',
     this.maxTeamsAllowed = '',
+    this.availability = '',
     this.errors = const {},
   });
 
@@ -40,6 +42,7 @@ class AddUserState {
       year: updatedFields?['year'] ?? year,
       teamId: updatedFields?['teamId'] ?? teamId,
       maxTeamsAllowed: updatedFields?['maxTeamsAllowed'] ?? maxTeamsAllowed,
+      availability: updatedFields?['availability'] ?? availability,
       role: role ?? this.role,
       errors: errors ?? this.errors,
     );

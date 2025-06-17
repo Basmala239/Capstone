@@ -4,6 +4,7 @@ import '../../../../../../resources/color_manager.dart';
 import '../../../../../../resources/text_styles.dart';
 import '../../../../../../widgets/background.dart';
 import '../../../../data/repository/delete_user_repository/delete_user_repository.dart';
+import '../../widget/show_dialog.dart';
 class GetStudentView extends StatelessWidget {
   const GetStudentView({super.key, required this.id, required this.token});
 
@@ -43,12 +44,21 @@ class GetStudentView extends StatelessWidget {
               if (choice == 'Edit') {
                 //Navigator.push(context, MaterialPageRoute(builder: (context)=>EditProfileView()));
               } else {
-                if (await deleteUser(
-                  token: token, userId: id, userType: 'student',)) {
-                  Navigator.pop(context);
+                if (await showExitDialog(context)) {
+                  if (await deleteUser(token: token, userId: id, userType: 'student',)) {
+                    Navigator.pop(context);
+                  }else{
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Server Error'),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  }
                 } else {
-                  print('not forget snake bar');
+                  print('cancel');
                 }
+
               }
             },)
         ],

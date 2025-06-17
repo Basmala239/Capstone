@@ -2,6 +2,7 @@ import 'package:capstone/features/auth/data/models/student_model/student_model.d
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../../../auth/presentation/model_view/user_provider/user_provider.dart';
+import '../../../../../../profile/presentation/view/profile_view/widgets/data_widget.dart';
 import '../../../../../data/repository/get_student_repository/get_student_repository.dart';
 
 class GetStudentBody extends StatelessWidget {
@@ -24,24 +25,25 @@ class GetStudentBody extends StatelessWidget {
         }
 
         final user = snapshot.data!;
-        return Padding(
+        return SingleChildScrollView(
+            child:Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('🆔 ID: ${user.id}'),
-              Text('👤 Name: ${user.name}'),
-              Text('📧 Email: ${user.email}'),
-              Text('🧩 Type: ${user.userType}'),
-              Text('🧩 Type: ${user.department}'),
-              Text('🧩 Type: ${user.github}'),
-              Text('🧩 Type: ${user.teamId}'),
-              Text('🧩 Type: ${user.year}'),
-              Text('📅 Created: ${user.createdAt}'),
-              Text('🕓 Updated: ${user.updatedAt}'),
+              dataWidget('ID', user.id.toString()),
+              dataWidget('Name', user.name),
+              dataWidget('Email', user.email),
+              dataWidget('Type', user.userType),
+              dataWidget('Department', user.department),
+              dataWidget('Githu', user.github?? ''),
+              dataWidget('TeamID', user.teamId.toString()),
+              dataWidget('Year', user.year),
+              dataWidget('Created', user.createdAt.toString()),
+              dataWidget('Updated', user.updatedAt.toString()),
             ],
           ),
-        );
+        ));
       },
     );
   }

@@ -5,6 +5,7 @@ import 'package:capstone/resources/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import '../../../../../resources/text_styles.dart';
 import '../../../../archive/presentation/model_view/project_cubit.dart';
 import '../../../../archive/presentation/view/archive_view.dart';
 import '../../../../auth/presentation/model_view/user_provider/user_provider.dart';
@@ -86,7 +87,7 @@ Widget buildMenuItem(BuildContext context) {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => TeamsScreen()));
       }),
-      ItemModel(Icon(Icons.add_reaction_outlined), 'Add Users', () {
+      ItemModel(Icon(Icons.manage_accounts_outlined), 'User Management', () {
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -120,7 +121,7 @@ Widget buildMenuItem(BuildContext context) {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ReportView(token: userProvider.token??''),
+            builder: (context) => ReportView(token: Provider.of<UserProvider>(context, listen: false).token??''),
           ),
         );
       }),
@@ -160,6 +161,7 @@ Widget buildHeader(BuildContext context) {
       color: ColorManager.blueEo,
       child: InkWell(
           onTap: () {
+            Navigator.pop(context);
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => ProfileView()));
           },
@@ -176,10 +178,9 @@ Widget buildHeader(BuildContext context) {
                     CircleAvatar(
                       backgroundColor: Colors.white,
                       radius: 30,
-                      // child:user.image!=null ?
-                      // Image.network(user.image!):
-                      // Text(user.name[0].toUpperCase(),
-                      //   style: TextStyles.blue4D18w700,),
+
+                      child:Text(Provider.of<UserProvider>(context, listen: false).user!.name.toString()[0].toUpperCase(),
+                        style: TextStyles.blue4D18w700,),
                     ),
                   ]
               )

@@ -20,6 +20,9 @@ class CustomGeneralButton extends StatelessWidget {
         decoration: BoxDecoration(
           color:inverse?ColorManager.op: ColorManager.blueEo,
           borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(color: Colors.black12, blurRadius: 4)
+            ],
           border: inverse? Border.all(color:ColorManager.blueEo):Border.all(color:ColorManager.op)
         ),
         child: Center(

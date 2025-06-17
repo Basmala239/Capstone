@@ -21,6 +21,7 @@ class _ViewReportBodyState extends State<ViewReportBody> {
 
   ReportDetails? _reportDetails;
   bool _loading = true;
+
   Future<void> fetchReportDetails() async {
     final url = Uri.parse(
         'https://dev.3bhady.com/api/v1/dashboard/reports/${widget.report.id}');
@@ -51,7 +52,7 @@ class _ViewReportBodyState extends State<ViewReportBody> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-        child:_loading
+        child: _loading
             ? Center(child: CircularProgressIndicator())
             : _reportDetails == null
             ? Center(child: Text('Failed to load report'))
@@ -69,41 +70,56 @@ class _ViewReportBodyState extends State<ViewReportBody> {
                 const SizedBox(height: 8),
                 _buildInfoRow('Meeting Date', widget.report.meetingDate),
                 const SizedBox(height: 16),
-                const Text(
-                  'Topics Discussed in the meeting:',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 8),
 
                 _sectionTitle('Topics Discussed'),
-                _sectionValue(_reportDetails!.topicsDiscussed),
+                Card(
+                    elevation: 2,
+                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Row(children: [
+                          Expanded(child:
+                          _sectionValue(_reportDetails!.topicsDiscussed),
+                          )
+                        ])
+                    )),
 
                 _sectionTitle('Tasks Given to Students'),
                 ..._reportDetails!.tasksGivenToStudents.map(
                       (task) =>
-                      ListTile(
-                        title: Text(task.title),
-                        subtitle: Text('Status: ${task
-                            .status}, Assigned to: ${task.assignedTo}'),
-                        leading: Icon(Icons.check_circle_outline),
+                      Card(
+                        elevation: 2,
+                        margin: const EdgeInsets.symmetric(vertical: 8),
+                        child:
+                        ListTile(
+                          title: Text(task.title),
+                          subtitle: Text('Status: ${task
+                              .status}, Assigned to: ${task.assignedTo}'),
+                          leading: Icon(Icons.check_circle_outline),
+                        ),
                       ),
                 ),
 
                 _sectionTitle('Attendance'),
                 ..._reportDetails!.attendance.map(
-                      (attendee) =>
-                      ListTile(
-                        title: Text(attendee.studentName),
-                        subtitle: Text('Time: ${attendee
-                            .attendanceTime}'),
-                        leading: Icon(
-                          attendee.status == 1 ? Icons.person : Icons
-                              .person_off,
-                          color: attendee.status == 1
-                              ? Colors.green
-                              : Colors.red,
-                        ),
-                      ),
+                        (attendee) =>
+                        Card(
+                          elevation: 2,
+                          margin: const EdgeInsets.symmetric(vertical: 8),
+                          child:
+                          ListTile(
+                            title: Text(attendee.studentName),
+                            subtitle: Text('Time: ${attendee
+                                .attendanceTime}'),
+                            leading: Icon(
+                              attendee.status == 1 ? Icons.person : Icons
+                                  .person_off,
+                              color: attendee.status == 1
+                                  ? Colors.green
+                                  : Colors.red,
+                            ),
+                          ),
+                        )
                 )
               ],
             )
@@ -115,15 +131,17 @@ class _ViewReportBodyState extends State<ViewReportBody> {
       children: [
         Expanded(flex: 3,
             child: Text('$label :',
-                style: const TextStyle(fontWeight: FontWeight.bold))),
-        Expanded(flex: 5, child: Text(value)),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))),
+        Expanded(flex: 5, child: Text(value, style: TextStyle(fontSize: 15))),
       ],
     );
   }
+
   Widget _sectionTitle(String text) {
     return Padding(
       padding: const EdgeInsets.only(top: 12, bottom: 4),
-      child: Text(text, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+      child: Text(
+          text, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
     );
   }
 

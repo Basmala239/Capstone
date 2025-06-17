@@ -35,7 +35,7 @@ class _ProfileEditViewBodyState extends State<ProfileEditViewBody> {
       children: [
         const SizedBox(height: 20),
         CustomTextField(controller: nameController, hint: 'Name', color: ColorManager.whiteop),
-        const SizedBox(height: 10),
+        Spacer(),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -61,7 +61,8 @@ class _ProfileEditViewBodyState extends State<ProfileEditViewBody> {
               editheight: 40,
             ),
           ],
-        )
+        ),
+        const SizedBox(height: 100),
       ],
     );
   }

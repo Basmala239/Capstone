@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:capstone/features/auth/data/models/app_user/app_user_model.dart';
 import 'package:capstone/features/auth/presentation/view/reset_password/reset_password_view.dart';
-import 'package:capstone/resources/color_manager.dart';
 import 'package:capstone/resources/text_styles.dart';
 import 'package:capstone/widgets/custom_buttons.dart';
 import 'package:capstone/widgets/custom_text_field.dart';
@@ -112,17 +111,6 @@ class _LoginViewBodyState extends State<LoginViewBody> {
             const SizedBox(height: 20,),
             Row(
               children: [
-                Checkbox(
-                  checkColor: ColorManager.gray4D,
-                  activeColor: ColorManager.white,
-                  value: false,
-                  onChanged: (bool? value) {
-
-                  },
-                ),
-                const SizedBox(width: 5,),
-                const Text('Remember Me',
-                  style: TextStyles.gray18W400,),
                 const Spacer(),
                 TextButton(onPressed: () {
                   Navigator.push(context, MaterialPageRoute(
