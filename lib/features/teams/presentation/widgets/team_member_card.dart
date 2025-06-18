@@ -1,3 +1,4 @@
+
 import 'package:capstone/features/task/data/models/team_member_model.dart';
 // import 'package:capstone/features/teams/data/models/team_member.dart';
 import 'package:flutter/material.dart';
@@ -17,12 +18,12 @@ class TeamMemberCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(isLarge ? 16 : 12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.white.withOpacity(0.7), 
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: const Color(0xFF2196F3), width: 2),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withValues(alpha: 0.1),
+            color: Colors.grey.withOpacity(0.1),
             spreadRadius: 1,
             blurRadius: 4,
             offset: const Offset(0, 2),

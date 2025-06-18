@@ -1,17 +1,18 @@
 import 'package:capstone/features/teams/data/models/team_model.dart';
 import 'package:capstone/features/teams/data/services/teams_service.dart';
+import 'package:capstone/features/teams/presentation/widgets/team_details.dart';
+import 'package:capstone/widgets/background.dart';
 import 'package:flutter/material.dart';
-import '../widgets/my_team_tab.dart';
 import '../widgets/teams_tab.dart';
 
-class TeamsScreen extends StatefulWidget {
-  const TeamsScreen({super.key});
+class TeamsTabsScreen extends StatefulWidget {
+  const TeamsTabsScreen({super.key});
 
   @override
-  State<TeamsScreen> createState() => _TeamsScreenState();
+  State<TeamsTabsScreen> createState() => _TeamsTabsScreenState();
 }
 
-class _TeamsScreenState extends State<TeamsScreen> {
+class _TeamsTabsScreenState extends State<TeamsTabsScreen> {
   List<TeamModel> allTeams = [];
   TeamModel? myTeam;
   List<TeamModel> filteredTeams = [];
@@ -106,12 +107,17 @@ class _TeamsScreenState extends State<TeamsScreen> {
         ),
         body: TabBarView(
           children: [
-            MyTeamTab(
-              myTeam: myTeam,
-              isLoading: isLoading,
-              errorMessage: errorMessage,
-              onRetry: _loadTeams,
-            ),
+            // My Team Tab
+            myTeam == null
+                ? const Stack(children: [Background(), Center(child: Text('No team data available'))])
+                : TeamDetails(
+                    myTeam: myTeam,
+                    isLoading: isLoading,
+                    errorMessage: errorMessage,
+                    onRetry: _loadTeams,
+                    tab: true,
+                  ),
+            // Teams Tab
             TeamsTab(
               teams: filteredTeams,
               isLoading: isLoading,
@@ -119,6 +125,7 @@ class _TeamsScreenState extends State<TeamsScreen> {
               onSearch: _searchTeams,
               onRequestJoin: _requestToJoinTeam,
               onRetry: _loadTeams,
+              isInTeam: myTeam == null,
             ),
           ],
         ),
@@ -126,3 +133,5 @@ class _TeamsScreenState extends State<TeamsScreen> {
     );
   }
 }
+// File is already in the correct directory: lib/features/teams/presentation/pages/teams_tabs_screen.dart
+// No changes needed.

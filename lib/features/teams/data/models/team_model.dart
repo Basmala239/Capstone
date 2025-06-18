@@ -8,26 +8,24 @@ import 'package:capstone/features/teams/data/models/project_model.dart';
 class TeamModel {
   final String id;
   final String name;
-  // final String projectName;
-  // final String projectDescription;
-final ProjectModel project;
+  final ProjectModel project;
   final String? teamImageUrl;
   final TeamMemberModel supervisor;
   final List<TeamMemberModel> members;
   final List<TaskModel> tasks;
   final String leaderId;
+  final bool isComplete; // جديد
 
   TeamModel({
     required this.id,
     required this.name,
-    // required this.projectName,
-    // required this.projectDescription,
     required this.project,
     this.teamImageUrl,
     required this.supervisor,
     required this.members,
-     required this.tasks,
-    required this.leaderId, 
+    required this.tasks,
+    required this.leaderId,
+    this.isComplete = false, // افتراضي
   });
 
   TeamMemberModel get leader => members.firstWhere((member) => member.id == leaderId);
@@ -41,6 +39,7 @@ final ProjectModel project;
     List<TeamMemberModel>? members,
     List<TaskModel>? tasks,
     String? leaderId,
+    bool? isComplete,
   }) {
     return TeamModel(
       id: id ?? this.id,
@@ -51,6 +50,7 @@ final ProjectModel project;
       members: members ?? this.members,
       tasks: tasks ?? this.tasks,
       leaderId: leaderId ?? this.leaderId,
+      isComplete: isComplete ?? this.isComplete,
     );
   }
 
