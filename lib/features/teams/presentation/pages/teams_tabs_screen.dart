@@ -1,3 +1,4 @@
+import 'package:capstone/features/teams/create_teams/presentation/pages/create_team_screen.dart';
 import 'package:capstone/features/teams/data/models/team_model.dart';
 import 'package:capstone/features/teams/data/services/teams_service.dart';
 import 'package:capstone/features/teams/presentation/widgets/team_details.dart';
@@ -19,6 +20,7 @@ class _TeamsTabsScreenState extends State<TeamsTabsScreen> {
   String searchQuery = '';
   bool isLoading = true;
   String? errorMessage;
+  bool hasTeam = false;
 
   @override
   void initState() {
@@ -36,26 +38,39 @@ class _TeamsTabsScreenState extends State<TeamsTabsScreen> {
       final teams = await TeamsService.loadTeams();
       setState(() {
         allTeams = teams.cast<TeamModel>();
-        myTeam = allTeams.first; // Assuming the first team is the user's team
-        filteredTeams = allTeams.skip(1).toList(); // Exclude the user's team from the list
+        if (allTeams.isNotEmpty) {
+          myTeam = allTeams.first; // Assuming the first team is the user's team
+          hasTeam = true;
+        } else {
+          myTeam = null;
+          hasTeam = false;
+        }
+        filteredTeams =
+            allTeams.skip(1).toList(); // Exclude the user's team from the list
         isLoading = false;
       });
     } catch (e) {
       setState(() {
         errorMessage = 'Failed to load teams: ${e.toString()}';
         isLoading = false;
+        hasTeam = false;
       });
     }
+    isLoading = false;
   }
 
   void _searchTeams(String query) {
     setState(() {
       searchQuery = query;
-      filteredTeams = allTeams
-          .where((team) => 
-              team.id != myTeam?.id && // Exclude my team from search results
-              team.name.toLowerCase().contains(query.toLowerCase()))
-          .toList();
+      filteredTeams =
+          allTeams
+              .where(
+                (team) =>
+                    team.id !=
+                        myTeam?.id && // Exclude my team from search results
+                    team.name.toLowerCase().contains(query.toLowerCase()),
+              )
+              .toList();
     });
   }
 
@@ -98,25 +113,54 @@ class _TeamsTabsScreenState extends State<TeamsTabsScreen> {
               labelColor: Colors.white,
               unselectedLabelColor: Colors.white70,
               labelStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-              tabs: [
-                Tab(text: 'My Team'),
-                Tab(text: 'Teams'),
-              ],
+              tabs: [Tab(text: 'My Team'), Tab(text: 'Teams')],
             ),
           ),
         ),
         body: TabBarView(
           children: [
             // My Team Tab
-            myTeam == null
-                ? const Stack(children: [Background(), Center(child: Text('No team data available'))])
-                : TeamDetails(
-                    myTeam: myTeam,
-                    isLoading: isLoading,
-                    errorMessage: errorMessage,
-                    onRetry: _loadTeams,
-                    tab: true,
+            hasTeam
+              ? TeamDetails(
+                myTeam: myTeam,
+                isLoading: isLoading,
+                errorMessage: errorMessage,
+                onRetry: _loadTeams,
+                tab: true,
+                onToggleComplete: () {
+                  setState(() {
+                    if (myTeam != null) {
+                      myTeam = myTeam!.copyWith(isComplete: !(myTeam!.isComplete));
+                    }
+                  });
+                },
+                )
+              : Stack(
+                children: [
+                  const Background(),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Center(child: Text('No team data available')),
+                      const Text('Please create or join a team to see details.'),
+                      TextButton(onPressed: () async {
+                        final result = await Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const CreateTeamScreen()),
+                        );
+                        if (result != null && result is TeamModel) {
+                          setState(() {
+                            myTeam = result;
+                            hasTeam = true;
+                          });
+                          DefaultTabController.of(context).animateTo(0);
+                        }
+                      }, child: const Text('Create Team')),
+                    ],
                   ),
+                ],
+                ),
             // Teams Tab
             TeamsTab(
               teams: filteredTeams,
@@ -133,5 +177,6 @@ class _TeamsTabsScreenState extends State<TeamsTabsScreen> {
     );
   }
 }
+
 // File is already in the correct directory: lib/features/teams/presentation/pages/teams_tabs_screen.dart
 // No changes needed.

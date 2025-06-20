@@ -54,7 +54,7 @@ class _TasksTabsScreenState extends State<TasksTabsScreen>
   @override
   void initState() {
     super.initState();
-    _taskService.refreshTasksInPrefs();
+    // _taskService.refreshTasksInPrefs();
     _tabController = TabController(length: _tabs.length, vsync: this);
     _loadData();
   }

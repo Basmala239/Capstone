@@ -1,5 +1,4 @@
 import 'package:capstone/features/auth/presentation/view/login_view/login_view.dart';
-import 'package:capstone/features/task/presentation/view/pages/tasks_list_screen.dart';
 import 'package:capstone/features/task/presentation/view/pages/tasks_tabs_screen.dart';
 import 'package:capstone/resources/color_manager.dart';
 import 'package:flutter/material.dart';
