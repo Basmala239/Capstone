@@ -1,12 +1,12 @@
+import 'package:capstone/features/auth/presentation/model_view/admin_user_provider/admin_user_provider.dart';
+import 'package:capstone/features/auth/presentation/model_view/student_user_provider/student_user_provider.dart';
+import 'package:capstone/features/auth/presentation/model_view/supervisor_user_provider/supervisor_user_provider.dart';
 import 'package:capstone/features/auth/presentation/view/login_view/login_view.dart';
-import 'package:capstone/features/task/presentation/view/pages/tasks_list_screen.dart';
 import 'package:capstone/features/task/presentation/view/pages/tasks_tabs_screen.dart';
 import 'package:capstone/resources/color_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import '../../../../../resources/text_styles.dart';
-import '../../../../archive/presentation/model_view/project_cubit.dart';
 import '../../../../archive/presentation/view/archive_view.dart';
 import '../../../../auth/presentation/model_view/user_provider/user_provider.dart';
 import '../../../../profile/presentation/view/profile_view/profile_view.dart';
@@ -21,20 +21,23 @@ import '../../../data/network/logout_api.dart';
 class NavigationDrawerr extends StatelessWidget {
   const NavigationDrawerr({super.key});
   @override
-  Widget build(BuildContext context) =>
-      Drawer(
+  Widget build(BuildContext context) {
+    final userProvider= Provider.of<UserProvider>(context, listen: false);
+    return Drawer(
 
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              buildHeader(context),
-              buildMenuItem(context),
-            ],
-          ),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            buildHeader(context,userProvider.user!.userType),
+            buildMenuItem(context),
+          ],
         ),
-      );
+      ),
+    );
+  }
 }
+
 Widget buildMenuItem(BuildContext context) {
   final user = Provider
       .of<UserProvider>(context)
@@ -44,23 +47,20 @@ Widget buildMenuItem(BuildContext context) {
 
   if (user == null) return SizedBox(); // safeguard
 
-  // Common item: Logout
   final logoutItem = ItemModel(Icon(Icons.logout), 'Log out', () {
-    logout(Provider.of<UserProvider>(context, listen: false).token);
-    Provider.of<UserProvider>(context,listen: false).clearUser();
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
           builder: (context) => LoginView(type: user.userType)),
           (r) => false,
     );
+    logout(userProvider.token);
   });
+
   final archiveItem = ItemModel(Icon(Icons.archive_outlined), 'Archive', () {
 
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) =>
-        BlocProvider(
-            create: (_) => ProjectCubit()..fetchProjects(userProvider.token ?? ''),
-            child: ArchiveView())));
+        context, MaterialPageRoute(builder: (context) =>ArchiveView()));
+
   });
 
   // Student menu
@@ -119,8 +119,8 @@ Widget buildMenuItem(BuildContext context) {
             MaterialPageRoute(builder: (context) => TeamsTabsScreen()));
       }),
       ItemModel(Icon(Icons.date_range_outlined), 'Schedule', () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => ScheduleView()));
+        // Navigator.push(context,
+        //     MaterialPageRoute(builder: (context) => ScheduleView()));
       }),
 
       ItemModel(Icon(Icons.task_outlined), 'Tasks', () {
@@ -166,7 +166,7 @@ Widget buildMenuItem(BuildContext context) {
 
 
 
-Widget buildHeader(BuildContext context) {
+Widget buildHeader(BuildContext context, String type) {
   return Material(
       color: ColorManager.blueEo,
       child: InkWell(
@@ -188,9 +188,15 @@ Widget buildHeader(BuildContext context) {
                     CircleAvatar(
                       backgroundColor: Colors.white,
                       radius: 30,
-
-                      child:Text(Provider.of<UserProvider>(context, listen: false).user!.name.toString()[0].toUpperCase(),
-                        style: TextStyles.blue4D18w700,),
+                      child:
+                        type == 'admin'?
+                      Text(Provider.of<AdminUserProvider>(context).user!.name.toString()[0].toUpperCase(),
+                        style: TextStyles.blue4D18w700,):
+                            type == 'student'?
+                            Text(Provider.of<StudentUserProvider>(context).user!.name.toString()[0].toUpperCase(),
+                              style: TextStyles.blue4D18w700,):
+                            Text(Provider.of<SupervisorUserProvider>(context).user!.name.toString()[0].toUpperCase(),
+                              style: TextStyles.blue4D18w700,),
                     ),
                   ]
               )

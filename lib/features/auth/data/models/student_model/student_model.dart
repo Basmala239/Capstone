@@ -6,10 +6,10 @@ class Student implements AppUser {
   @override
   final String userType;
   @override
-  final String name;
-  @override
   final String email;
-  final String? github;
+  @override
+  String name;
+  String? github='';
   final String department;
   final String year;
   final int teamId;

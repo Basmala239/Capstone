@@ -4,6 +4,7 @@ import '../../../../../../resources/color_manager.dart';
 import '../../../../../../resources/text_styles.dart';
 import '../../../../../../widgets/background.dart';
 import '../../../../data/repository/delete_user_repository/delete_user_repository.dart';
+import '../../../all_users/view/all_users_view.dart';
 import '../../widget/show_dialog.dart';
 class GetSupervisorView extends StatelessWidget {
   const GetSupervisorView({super.key, required this.id, required this.token});
@@ -47,6 +48,8 @@ class GetSupervisorView extends StatelessWidget {
                   if (await showExitDialog(context)) {
                     if (await deleteUser(token: token, userId: id, userType: 'supervisor',)) {
                       Navigator.pop(context);
+                      Navigator.pop(context);
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>UserListView(token: token,)));
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(

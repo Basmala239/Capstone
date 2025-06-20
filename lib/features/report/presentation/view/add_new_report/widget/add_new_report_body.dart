@@ -1,4 +1,4 @@
-import 'package:capstone/features/auth/presentation/model_view/user_provider/user_provider.dart';
+import 'package:capstone/features/auth/presentation/model_view/supervisor_user_provider/supervisor_user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -44,7 +44,7 @@ class _AddNewReportBodyState extends State<AddNewReportBody> {
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 16))),
                     Expanded(flex: 5, child: Text(Provider
-                        .of<UserProvider>(context, listen: false)
+                        .of<SupervisorUserProvider>(context)
                         .user!
                         .name
                         .toString(), style: TextStyle(fontSize: 15))),

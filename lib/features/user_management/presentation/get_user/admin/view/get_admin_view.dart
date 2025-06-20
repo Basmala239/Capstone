@@ -1,4 +1,4 @@
-import 'package:capstone/features/auth/presentation/model_view/user_provider/user_provider.dart';
+import 'package:capstone/features/auth/presentation/model_view/admin_user_provider/admin_user_provider.dart';
 import 'package:capstone/features/user_management/presentation/get_user/admin/view/widget/get_admin_body.dart';
 import 'package:capstone/features/user_management/presentation/update_user/update_user_view.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +7,7 @@ import '../../../../../../resources/color_manager.dart';
 import '../../../../../../resources/text_styles.dart';
 import '../../../../../../widgets/background.dart';
 import '../../../../data/repository/delete_user_repository/delete_user_repository.dart';
+import '../../../all_users/view/all_users_view.dart';
 import '../../widget/show_dialog.dart';
 class GetAdminView extends StatelessWidget {
   const GetAdminView({super.key, required this.id, required this.token});
@@ -49,7 +50,7 @@ class GetAdminView extends StatelessWidget {
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>UpdateUserView(token: token, id: id, type: 'admin',)));
               } else {
                 if (id == Provider
-                    .of<UserProvider>(context, listen: false)
+                    .of<AdminUserProvider>(context, listen: false)
                     .user
                     ?.id) {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -63,6 +64,8 @@ class GetAdminView extends StatelessWidget {
                     if (await deleteUser(
                       token: token, userId: id, userType: 'admin',)) {
                       Navigator.pop(context);
+                      Navigator.pop(context);
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>UserListView(token: token,)));
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(

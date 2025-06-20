@@ -1,6 +1,6 @@
 class AppUser {
   final int id;
-  final String? name;
+  String name= 'userName';
   final String email;
   final String userType;
 
@@ -19,4 +19,5 @@ class AppUser {
       userType: json['user_type']
     );
   }
+
 }

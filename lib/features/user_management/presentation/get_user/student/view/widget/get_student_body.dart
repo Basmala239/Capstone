@@ -36,7 +36,7 @@ class GetStudentBody extends StatelessWidget {
               dataWidget('Email', user.email),
               dataWidget('Type', user.userType),
               dataWidget('Department', user.department),
-              dataWidget('Githu', user.github?? ''),
+              dataWidget('Github', user.github?? 'Not Found'),
               dataWidget('TeamID', user.teamId.toString()),
               dataWidget('Year', user.year),
               dataWidget('Created', user.createdAt.toString()),

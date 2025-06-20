@@ -31,10 +31,10 @@ Future<AppUser?> getProfile(String token) async {
         return Student.fromJson(userJson);
       } else if (userType == 'admin') {
         print('get admin profile');
-        return Admin.fromJson(userJson); // Define similarly
+        return Admin.fromJson(userJson);
       } else if (userType == 'supervisor') {
         print('get supervisor profile');
-        return Supervisor.fromJson(userJson); // Define similarly
+        return Supervisor.fromJson(userJson);
       } else {
         return AppUser.fromJson(userJson);
       }
