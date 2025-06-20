@@ -13,8 +13,10 @@ class TaskModel {
   final List<AttachmentModel> attachments;
   //MARK: Add createdAt and updatedAt fields later
   /// [Here.number1] number 1
-  // final DateTime createdAt;
+  final DateTime createdAt;
   // final DateTime updatedAt;
+  final DateTime? completedAt;
+  final Map<TaskStatus, List<DateTime>> statusTimestamps;
 
   TaskModel({
     required this.id,
@@ -25,7 +27,9 @@ class TaskModel {
     required this.status,
     required this.members,
     required this.attachments,
-    // required this.createdAt,
+    required this.createdAt,
+    this.completedAt,
+    this.statusTimestamps = const {},
     // required this.updatedAt,
   });
 
@@ -40,6 +44,8 @@ class TaskModel {
     List<AttachmentModel>? attachments,
     DateTime? createdAt,
     DateTime? updatedAt,
+    DateTime? completedAt,
+    Map<TaskStatus, List<DateTime>>? statusTimestamps,
   }) {
     return TaskModel(
       id: id ?? this.id,
@@ -50,7 +56,9 @@ class TaskModel {
       status: status ?? this.status,
       members: members ?? this.members,
       attachments: attachments ?? this.attachments,
-      // createdAt: createdAt ?? this.createdAt,
+      createdAt: createdAt ?? this.createdAt,
+      completedAt: completedAt ?? this.completedAt,
+      statusTimestamps: statusTimestamps ?? this.statusTimestamps,
       // updatedAt: updatedAt ?? this.updatedAt,
     );
   }
@@ -79,6 +87,7 @@ class AttachmentModel {
 }
 
 enum AttachmentType {
+  link,
   image,
   pdf,
   document,

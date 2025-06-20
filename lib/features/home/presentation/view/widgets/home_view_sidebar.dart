@@ -1,5 +1,4 @@
 import 'package:capstone/features/auth/presentation/view/login_view/login_view.dart';
-import 'package:capstone/features/task/presentation/view/pages/tasks_list_screen.dart';
 import 'package:capstone/features/task/presentation/view/pages/tasks_tabs_screen.dart';
 import 'package:capstone/resources/color_manager.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +9,10 @@ import '../../../../archive/presentation/model_view/project_cubit.dart';
 import '../../../../archive/presentation/view/archive_view.dart';
 import '../../../../auth/presentation/model_view/user_provider/user_provider.dart';
 import '../../../../profile/presentation/view/profile_view/profile_view.dart';
+import '../../../../projects/presentation/pages/project_ideas_screen.dart';
 import '../../../../report/presentation/view/last_reports/report_view.dart';
 import '../../../../schedule/presentation/view/schedule_view.dart';
-import '../../../../teams/presentation/pages/teams_screen.dart';
+import '../../../../teams/presentation/pages/teams_tabs_screen.dart';
 import '../../../../user_management/presentation/all_users/view/all_users_view.dart';
 import '../../../data/model/list_item.dart';
 import '../../../data/network/logout_api.dart';
@@ -65,14 +65,17 @@ Widget buildMenuItem(BuildContext context) {
   // Student menu
   if (user.userType == 'student') {
     list = [
-      ItemModel(Icon(Icons.lightbulb_outline), 'Project', () {}),
+      ItemModel(Icon(Icons.lightbulb_outline), 'Project', () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => ProjectIdeasScreen()));
+      }),
       ItemModel(Icon(Icons.task_outlined), 'Tasks', () {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => TasksTabsScreen()));
       }),
       ItemModel(Icon(Icons.people_alt_outlined), 'Teams', () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => TeamsScreen()));
+            MaterialPageRoute(builder: (context) => TeamsTabsScreen()));
       }),
       archiveItem,
       logoutItem,
@@ -82,10 +85,13 @@ Widget buildMenuItem(BuildContext context) {
   // Admin menu
   else if (user.userType == 'admin') {
     list = [
-      ItemModel(Icon(Icons.lightbulb_outline), 'Project', () {}),
+      ItemModel(Icon(Icons.lightbulb_outline), 'Project', () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => ProjectIdeasScreen()));
+      }),
       ItemModel(Icon(Icons.people_alt_outlined), 'Teams', () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => TeamsScreen()));
+            MaterialPageRoute(builder: (context) => TeamsTabsScreen()));
       }),
       ItemModel(Icon(Icons.manage_accounts_outlined), 'User Management', () {
         Navigator.push(
@@ -103,10 +109,13 @@ Widget buildMenuItem(BuildContext context) {
   // Supervisor menu
   else if (user.userType == 'supervisor') {
     list = [
-      ItemModel(Icon(Icons.lightbulb_outline), 'Project', () {}),
+      ItemModel(Icon(Icons.lightbulb_outline), 'Project', () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => ProjectIdeasScreen()));
+      }),
       ItemModel(Icon(Icons.people_alt_outlined), 'Teams', () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => TeamsScreen()));
+            MaterialPageRoute(builder: (context) => TeamsTabsScreen()));
       }),
       ItemModel(Icon(Icons.date_range_outlined), 'Schedule', () {
         Navigator.push(context,
@@ -115,7 +124,7 @@ Widget buildMenuItem(BuildContext context) {
 
       ItemModel(Icon(Icons.task_outlined), 'Tasks', () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => TasksListScreen()));
+            MaterialPageRoute(builder: (context) => TasksTabsScreen()));
       }),
       ItemModel(Icon(Icons.file_copy_outlined), 'Report', () {
         Navigator.push(
