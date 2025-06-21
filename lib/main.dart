@@ -44,3 +44,8 @@ class MyApp extends StatelessWidget {
     ));
   }
 }
+
+// NotificationService().showNotification(
+// title: "Email verification",
+// body: "Code: ${codeResponse.data.code}",
+// );

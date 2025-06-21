@@ -7,33 +7,23 @@ class NotificationCubit extends Cubit<NotificationState> {
 
   NotificationCubit(this.repository) : super(NotificationInitial());
 
-  void fetchUnread() async {
+  void fetch({bool unreadOnly = false}) async {
     emit(NotificationLoading());
     try {
-      final list = await repository.getUnreadNotifications();
+      final list = await repository.getNotifications(unreadOnly: unreadOnly);
       emit(NotificationLoaded(list));
     } catch (e) {
       emit(NotificationError(e.toString()));
     }
   }
 
-  void fetchAll() async {
-    emit(NotificationLoading());
-    try {
-      final list = await repository.getAllNotifications();
-      emit(NotificationLoaded(list));
-    } catch (e) {
-      emit(NotificationError(e.toString()));
-    }
-  }
-
-  void markAsRead(String id) async {
+  void markAsRead(String id, {bool unreadOnly = false}) async {
     await repository.markAsRead(id);
-    fetchUnread();
+    fetch(unreadOnly: unreadOnly);
   }
 
-  void markAllAsRead() async {
+  void markAllAsRead({bool unreadOnly = false}) async {
     await repository.markAllAsRead();
-    fetchUnread();
+    fetch(unreadOnly: unreadOnly);
   }
 }

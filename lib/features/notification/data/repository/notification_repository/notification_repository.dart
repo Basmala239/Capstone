@@ -1,14 +1,16 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
 import '../../models/notification_model.dart';
 class NotificationRepository {
   final String token;
 
   NotificationRepository(this.token);
 
-  Future<List<NotificationModel>> getUnreadNotifications() async {
+  Future<List<NotificationModel>> getNotifications({bool unreadOnly = false}) async {
+    final endpoint = unreadOnly ? 'unread' : 'all';
     final response = await http.get(
-      Uri.parse('https://dev.3bhady.com/api/v1/notifications/unread'),
+      Uri.parse('https://dev.3bhady.com/api/v1/notifications/$endpoint'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': 'application/json',
@@ -16,36 +18,11 @@ class NotificationRepository {
     );
 
     if (response.statusCode == 200) {
-      final Map<String, dynamic> jsonMap = json.decode(response.body);
-      final List? data = jsonMap['data'];
-      if (data == null) {
-        return [];
-      }
-      return data.map((e) => NotificationModel.fromJson(e)).toList();
-
-    } else {
-      throw Exception('Failed to load unread notifications');
-    }
-  }
-
-  Future<List<NotificationModel>> getAllNotifications() async {
-    final response = await http.get(
-      Uri.parse('https://dev.3bhady.com/api/v1/notifications/all'),
-      headers: {
-        'Authorization': 'Bearer $token',
-        'Accept': 'application/json',
-      },
-    );
-
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> jsonMap = json.decode(response.body);
-      final List? data = jsonMap['data'];
-      if (data == null) {
-        return [];
-      }
+      final Map<String, dynamic> jsonData = json.decode(response.body);
+      final List data = jsonData['all_notifications'] ?? [];
       return data.map((e) => NotificationModel.fromJson(e)).toList();
     } else {
-      throw Exception('Failed to load all notifications');
+      throw Exception('Failed to load notifications');
     }
   }
 

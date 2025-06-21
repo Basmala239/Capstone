@@ -1,5 +1,4 @@
 import '../../data/models/notification_model.dart';
-
 abstract class NotificationState {}
 
 class NotificationInitial extends NotificationState {}

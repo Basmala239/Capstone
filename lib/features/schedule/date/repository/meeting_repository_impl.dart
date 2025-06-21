@@ -20,7 +20,7 @@ class MeetingRepositoryImpl extends MeetingRepository {
       },
       body: json.encode(meeting.toJson()),
     );
-
+    print(response.body);
     if (response.statusCode != 200 && response.statusCode != 201) {
       throw Exception('Failed to create meeting: ${response.body}');
     }

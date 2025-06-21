@@ -41,27 +41,6 @@ class ArchiveViewBody extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final project = state.projects[index];
                         return projectCard(project, context);
-
-
-                         //     title: Text(project.title),
-                        //     content: Column(
-                        //       mainAxisSize: MainAxisSize.min,
-                        //       crossAxisAlignment: CrossAxisAlignment.start,
-                        //       children: [
-                        //         Text("Description: ${project.description}"),
-                        //         SizedBox(height: 5),
-                        //         Text("Year: ${project.year}"),
-                        //         SizedBox(height: 5),
-                        //         Text("Tools: ${project.tools.join(', ')}"),
-                        //         SizedBox(height: 10),
-                        //         Text("Team Members:"),
-                        //         ...project.teamMembers.map(
-                        //               (m) => Text("- ${m.firstName} ${m.lastName} (${m.role}${m.isLeader ? ', Leader' : ''})"),
-                        //         ),
-                        //       ],
-                        //     ),
-
-
                       },
                     );
                   } else if (state is ProjectError) {

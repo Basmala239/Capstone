@@ -93,7 +93,7 @@ class _ViewReportBodyState extends State<ViewReportBody> {
                         ListTile(
                           title: Text(task.title),
                           subtitle: Text('Status: ${task
-                              .status}, Assigned to: ${task.assignedTo}'),
+                              .status}, Assigned to: ${task}'),
                           leading: Icon(Icons.check_circle_outline),
                         ),
                       ),

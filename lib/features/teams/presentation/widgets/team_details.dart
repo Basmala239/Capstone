@@ -1,6 +1,5 @@
 import 'package:capstone/features/teams/data/models/team_model.dart' show TeamModel;
 import 'package:capstone/widgets/background.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'team_member_card.dart';
 
@@ -10,6 +9,7 @@ class TeamDetails extends StatefulWidget {
   final String? errorMessage;
   final VoidCallback onRetry;
   final bool tab;
+  final VoidCallback? onToggleComplete;
 
   const TeamDetails({
     super.key,
@@ -18,6 +18,7 @@ class TeamDetails extends StatefulWidget {
     this.errorMessage,
     required this.onRetry,
     this.tab = false,
+    this.onToggleComplete,
   });
 
   @override
@@ -25,14 +26,6 @@ class TeamDetails extends StatefulWidget {
 }
 
 class _TeamDetailsState extends State<TeamDetails> {
-  late TeamModel? _team;
-
-  @override
-  void initState() {
-    super.initState();
-    _team = widget.myTeam;
-  }
-
   @override
   Widget build(BuildContext context) {
     if (widget.isLoading) {
@@ -59,11 +52,11 @@ class _TeamDetailsState extends State<TeamDetails> {
       );
     }
 
-    if (_team == null) {
+    if (widget.myTeam == null) {
       return const Center(child: Text('No team data available'));
     }
 
-    final team = _team!;
+    final team = widget.myTeam!;
 
     return Stack(
       children: [
@@ -118,11 +111,7 @@ class _TeamDetailsState extends State<TeamDetails> {
                 ),
                 if (widget.tab)
                   TextButton(
-                    onPressed: () {
-                      setState(() {
-                        _team = team.copyWith(isComplete: !team.isComplete);
-                      });
-                    },
+                    onPressed: widget.onToggleComplete,
                     child: Text(team.isComplete ? 'Mark Incomplete' : 'Mark Complete'),
                   ),
               ],
