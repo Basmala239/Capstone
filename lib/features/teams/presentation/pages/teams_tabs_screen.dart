@@ -120,7 +120,7 @@ class _TeamsTabsScreenState extends State<TeamsTabsScreen> {
         body: TabBarView(
           children: [
             // My Team Tab
-            hasTeam
+            !hasTeam
               ? TeamDetails(
                 myTeam: myTeam,
                 isLoading: isLoading,
