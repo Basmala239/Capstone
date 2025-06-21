@@ -38,4 +38,4 @@ class Student {
       email: email ?? this.email,
     );
   }
-}
+
