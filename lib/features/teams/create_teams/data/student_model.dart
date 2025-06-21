@@ -26,6 +26,8 @@ class Student {
     String? gender,
     String? profileImage,
     bool? isInvited,
+    String? avatarUrl,
+    String? email,
   }) {
     return Student(
       id: id ?? this.id,
