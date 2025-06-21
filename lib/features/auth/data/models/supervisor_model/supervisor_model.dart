@@ -6,11 +6,11 @@ class Supervisor implements AppUser {
   @override
   final String userType;
   @override
-  final String name;
+  String name;
   @override
   final String email;
   final String department;
-  final int maxTeamsAllowed;
+  int? maxTeamsAllowed =0;
   final int availability;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -54,4 +54,5 @@ class Supervisor implements AppUser {
       'updated_at': updatedAt.toIso8601String(),
     };
   }
+
 }

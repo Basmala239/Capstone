@@ -3,8 +3,7 @@ import '../app_user/app_user_model.dart';
 class Admin implements AppUser {
   @override final int id;
   @override final String userType;
-  @override
-  final String name;
+  @override String name;
   @override final String email;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -28,4 +27,5 @@ class Admin implements AppUser {
       updatedAt: DateTime.parse(json['updated_at']),
     );
   }
+
 }

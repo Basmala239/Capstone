@@ -1,6 +1,7 @@
 import 'package:capstone/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../../resources/text_styles.dart';
 import '../../../../../../widgets/custom_buttons.dart';
 import '../../../../data/repository/add_user_repository/add_user_repasitory.dart';
 import '../../../all_users/view/all_users_view.dart';
@@ -49,11 +50,15 @@ class AddUserBody extends StatelessWidget {
                 errorText: state.errors['password'],
                 onChanged: (val) => cubit.updateField('password', val),
               ),
+              const SizedBox(height: 3),
+              Text('Role', style: TextStyles.black22W500),
+              const SizedBox(height: 3),
               DropdownButtonFormField<String>(
                 decoration: const InputDecoration(
                   labelText: 'Choose an option',
                   border: OutlineInputBorder(),
                 ),
+
                 value: state.role,
                 items: ['admin', 'student', 'supervisor']
                     .map((option) => DropdownMenuItem(
@@ -132,7 +137,7 @@ class AddUserBody extends StatelessWidget {
                         name: _nameController.text.trim(),
                         email: _emailController.text.trim(),
                         password: _passwordController.text.trim(),
-                        userType: state.role ?? 'student',
+                        userType: state.role ?? 'admin',
                         teamId: _teamIdController.text.trim(),
                         github: _githubController.text.trim(),
                         department: _departmentController.text.trim(),

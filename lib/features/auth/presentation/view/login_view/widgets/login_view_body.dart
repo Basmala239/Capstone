@@ -1,5 +1,11 @@
 import 'dart:convert';
-import 'package:capstone/features/auth/data/models/app_user/app_user_model.dart';
+import 'package:capstone/features/auth/data/models/admin_model/admin_model.dart';
+import 'package:capstone/features/auth/data/models/student_model/student_model.dart';
+import 'package:capstone/features/auth/data/models/supervisor_model/supervisor_model.dart';
+import 'package:capstone/features/auth/presentation/model_view/admin_user_provider/admin_user_provider.dart';
+import 'package:capstone/features/auth/presentation/model_view/student_user_provider/student_user_provider.dart';
+import 'package:capstone/features/auth/presentation/model_view/supervisor_user_provider/supervisor_user_provider.dart';
+import 'package:capstone/features/auth/presentation/model_view/user_provider/user_provider.dart';
 import 'package:capstone/features/auth/presentation/view/reset_password/reset_password_view.dart';
 import 'package:capstone/resources/text_styles.dart';
 import 'package:capstone/widgets/custom_buttons.dart';
@@ -11,7 +17,6 @@ import '../../../../../home/presentation/view/home_view.dart';
 import '../../../../../profile/data/repository/get_profile_repository/profile_repository.dart';
 import '../../../../data/models/login_response/login_response_model.dart';
 import '../../../model_view/login_provider/Login_provider.dart';
-import '../../../model_view/user_provider/user_provider.dart';
 
 class LoginViewBody extends StatefulWidget {
   final String type;
@@ -54,9 +59,20 @@ class _LoginViewBodyState extends State<LoginViewBody> {
         Provider.of<LoginProvider>(context, listen: false).wrongType('Not Found');
         return;
       }
+      if( user.userType == 'student'){
+        Provider.of<StudentUserProvider>(context,listen: false).setStudent((await getProfile(userData.accessToken)) as Student, userData.accessToken);
+        Provider.of<UserProvider>(context,listen: false).setUser((Provider.of<StudentUserProvider>(context,listen: false).user) as Student, userData.accessToken);
+      }
+      if( user.userType == 'admin'){
+        Provider.of< AdminUserProvider>(context,listen: false).setAdmin((await getProfile(userData.accessToken)) as Admin, userData.accessToken);
+        Provider.of<UserProvider>(context,listen: false).setUser((Provider.of<AdminUserProvider>(context,listen: false).user) as Admin, userData.accessToken);
+      }
+      if( user.userType == 'supervisor'){
+        print('supervisor');
+        Provider.of<SupervisorUserProvider>(context,listen: false).setSupervisor((await getProfile(userData.accessToken)) as Supervisor, userData.accessToken);
+        Provider.of<UserProvider>(context,listen: false).setUser((Provider.of<SupervisorUserProvider>(context,listen: false).user) as Supervisor, userData.accessToken);
+      }
 
-      final userProvider = Provider.of<UserProvider>(context, listen: false);
-      userProvider.setUser(await getProfile(userData.accessToken) as AppUser, userData.accessToken);
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => HomeView()),

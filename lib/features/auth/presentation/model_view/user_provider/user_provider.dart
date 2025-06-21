@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-
 import '../../../data/models/app_user/app_user_model.dart';
 
 class UserProvider with ChangeNotifier {

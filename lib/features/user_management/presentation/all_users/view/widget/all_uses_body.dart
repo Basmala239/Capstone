@@ -14,7 +14,8 @@ class UserListBody extends StatelessWidget {
     return BlocBuilder<UserCubit, UserState>(
       builder: (context, state) {
         if (state is UserLoading) {
-          return Center(child: CircularProgressIndicator());
+          return Center(
+              child: CircularProgressIndicator());
         } else if (state is UserLoaded) {
           return ListView.builder(
             itemCount: state.users.length,

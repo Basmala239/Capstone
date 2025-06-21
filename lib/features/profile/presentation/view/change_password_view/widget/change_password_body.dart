@@ -5,7 +5,7 @@ import '../../../../../../resources/color_manager.dart';
 import '../../../../../../widgets/custom_buttons.dart';
 import '../../../../../../widgets/custom_text_field.dart';
 import '../../../../../auth/presentation/model_view/user_provider/user_provider.dart';
-import '../../../../data/repository/change_pasword_repository/change_password_repository.dart';
+import '../../../../data/repository/change_password_repository/change_password_repository.dart';
 import '../../../model_view/change_password/change_password_cubit.dart';
 import '../../../model_view/change_password/change_password_state.dart';
 class ChangePasswordBody extends StatefulWidget {
@@ -78,19 +78,16 @@ class _ChangePasswordBodyState extends State<ChangePasswordBody> {
                       );
 
                       if (cubit.state.isValid) {
-                        if (await changePassword(
+                        String res= await changePassword(
                           token: Provider.of<UserProvider>(context, listen: false).token ?? '',
                           currentPassword: _currentPasswordController.text.trim(),
                           newPassword: _newPasswordController.text.trim(),
-                        )) {
+                        );
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Changed Successfully'), duration: Duration(seconds: 2)),
+                            SnackBar(content: Text(res), duration: Duration(seconds: 2)),
                           );
+                          if(res == 'تم تغيير كلمة المرور بنجاح.'){
                           Navigator.pop(context);
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Server Error'), duration: Duration(seconds: 2)),
-                          );
                         }
                       }
                     },

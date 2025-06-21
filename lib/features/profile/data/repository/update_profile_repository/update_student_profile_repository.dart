@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-Future<void> updateProfile({
+Future<String> updateProfileStudent({
   required String token,
   required String name,
-  required String email,
+  required String github,
 }) async {
   final uri = Uri.parse('https://dev.3bhady.com/api/v1/profile');
 
@@ -16,17 +16,21 @@ Future<void> updateProfile({
       'Content-Type': 'application/json',
     },
     body: jsonEncode({
-      'student_name': name,
-      'email': email,
+      'name': name,
+      'github': github
     }),
   );
 
+  final Map<String, dynamic> responseBody = jsonDecode(response.body);
+
   if (response.statusCode == 200) {
     print('✅ Profile updated successfully');
-    print(jsonDecode(response.body));
+    print(responseBody);
+    return responseBody['msg'] ?? 'Profile updated successfully';
   } else {
     print('❌ Failed to update profile');
     print('Status code: ${response.statusCode}');
     print('Body: ${response.body}');
+    return responseBody['msg'] ?? 'Failed to update profile';
   }
 }

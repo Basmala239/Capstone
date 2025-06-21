@@ -1,10 +1,9 @@
 import 'dart:convert';
 
+import 'package:capstone/features/auth/presentation/model_view/supervisor_user_provider/supervisor_user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-
-import '../../../../../auth/presentation/model_view/user_provider/user_provider.dart';
 import '../../../../data/model/report_details/report_details_model.dart';
 import '../../../../data/model/report_details/report_details_response.dart';
 import '../../../../data/model/report_model.dart';
@@ -64,7 +63,7 @@ class _ViewReportBodyState extends State<ViewReportBody> {
                 _buildInfoRow('Project Title', widget.report.teamName),
                 const SizedBox(height: 8),
                 _buildInfoRow('Supervisors', Provider
-                    .of<UserProvider>(context)
+                    .of<SupervisorUserProvider>(context)
                     .user
                     ?.name ?? 'Supervisor'),
                 const SizedBox(height: 8),
@@ -94,7 +93,7 @@ class _ViewReportBodyState extends State<ViewReportBody> {
                         ListTile(
                           title: Text(task.title),
                           subtitle: Text('Status: ${task
-                              .status}, Assigned to: ${task.assignedTo}'),
+                              .status}, Assigned to: ${task}'),
                           leading: Icon(Icons.check_circle_outline),
                         ),
                       ),

@@ -1,7 +1,9 @@
+import 'package:capstone/features/auth/presentation/model_view/user_provider/user_provider.dart';
 import 'package:capstone/features/profile/presentation/view/edit_profile_view/widgets/profile_edit_view_body.dart';
 import 'package:capstone/widgets/background.dart';
 import 'package:capstone/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class EditProfileView extends StatelessWidget {
   const EditProfileView({super.key});
@@ -13,7 +15,7 @@ class EditProfileView extends StatelessWidget {
       body: Stack(
         children: [
           Background(),
-          ProfileEditViewBody(),
+          ProfileEditViewBody(userType: Provider.of<UserProvider>(context).user?.userType ?? '',),
         ],
       ),
     );

@@ -7,13 +7,11 @@ class ProjectInitial extends ProjectState {}
 class ProjectLoading extends ProjectState {}
 
 class ProjectLoaded extends ProjectState {
-  final List<ProjectModel> projects;
-
-  ProjectLoaded({required this.projects});
+  final List<Project> projects;
+  ProjectLoaded(this.projects);
 }
 
 class ProjectError extends ProjectState {
   final String message;
-
-  ProjectError({required this.message});
+  ProjectError(this.message);
 }

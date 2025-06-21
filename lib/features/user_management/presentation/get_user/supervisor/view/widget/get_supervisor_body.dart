@@ -1,7 +1,7 @@
 import 'package:capstone/features/auth/data/models/supervisor_model/supervisor_model.dart';
+import 'package:capstone/features/auth/presentation/model_view/user_provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../../../../auth/presentation/model_view/user_provider/user_provider.dart';
 import '../../../../../../profile/presentation/view/profile_view/widgets/data_widget.dart';
 import '../../../../../data/repository/get_supervisor_repository/get_supervisor_repository.dart';
 
@@ -38,6 +38,7 @@ class GetSupervisorBody extends StatelessWidget {
                   dataWidget('Email', user.email),
                   dataWidget('Type', user.userType),
                   dataWidget('Department', user.department),
+                  dataWidget('Max Teams Allowed', user.maxTeamsAllowed.toString()),
                   dataWidget('Created', user.createdAt.toString()),
                   dataWidget('Updated', user.updatedAt.toString()),
                 ],
