@@ -9,25 +9,25 @@ import 'package:capstone/resources/color_manager.dart';
 import 'package:capstone/widgets/background.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../auth/presentation/model_view/user_provider/user_provider.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
   @override
   Widget build(BuildContext context) {
-    print("home view :${Provider.of<UserProvider>(context, listen: false).user?.userType}");
-   // fetchTaskCompletionDistribution(Provider.of<UserProvider>(context, listen: false).token ?? '');
+    final userProvider=Provider.of<UserProvider>(context, listen: false);
     return Scaffold(
       appBar: buildAppBar(context),
       body: Stack(
         children: [
           Background(),
 
-          if(Provider.of<UserProvider>(context, listen: false).user?.userType =='student')
+          if(userProvider.user?.userType =='student')
             StudentHomeViewBody(),
-          if(Provider.of<UserProvider>(context, listen: false).user?.userType=='admin')
+          if(userProvider.user?.userType=='admin')
             AdminHomeViewBody(),
-          if(Provider.of<UserProvider>(context, listen: false).user?.userType=='supervisor')
+          if(userProvider.user?.userType=='supervisor')
             SupervisorHomeViewBody(),
         ],
       ),

@@ -24,7 +24,6 @@ class LoginProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // Validation logic
   String? _validateUsernameOrEmail(String value) {
     if (value.isEmpty) {
       return 'This field cannot be empty';
@@ -47,7 +46,6 @@ class LoginProvider with ChangeNotifier {
     return null;
   }
 
-  // Final check before login
   bool validateForm() {
     _usernameError = _validateUsernameOrEmail(_usernameOrEmail);
     _passwordError = _validatePassword(_password);

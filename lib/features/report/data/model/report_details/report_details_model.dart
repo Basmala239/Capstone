@@ -1,5 +1,5 @@
-import 'package:capstone/features/report/data/model/report_details/task_model.dart';
 
+import 'package:capstone/features/report/data/model/report_details/task_model.dart';
 import 'attendance_model.dart';
 
 class ReportDetails {
@@ -7,7 +7,7 @@ class ReportDetails {
   final String meetingDate;
   final String supervisors;
   final String topicsDiscussed;
-  final List<Task> tasksGivenToStudents;
+  final List<TaskReport> tasksGivenToStudents;
   final List<Attendance> attendance;
 
   ReportDetails({
@@ -25,8 +25,8 @@ class ReportDetails {
       meetingDate: json['meeting_date'],
       supervisors: json['supervisors'],
       topicsDiscussed: json['topics_discussed'],
-      tasksGivenToStudents: List<Task>.from(
-        (json['tasks_given_to_students'] ?? []).map((x) => Task.fromJson(x)),
+      tasksGivenToStudents: List<TaskReport>.from(
+        (json['tasks_given_to_students'] ?? []).map((x) => TaskReport.fromJson(x)),
       ),
       attendance: List<Attendance>.from(
         (json['attendance'] ?? []).map((x) => Attendance.fromJson(x)),

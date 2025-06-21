@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<bool> changePassword({
+Future<String> changePassword({
   required String token,
   required String currentPassword,
   required String newPassword,
@@ -21,14 +21,17 @@ Future<bool> changePassword({
     },
   );
 
+  final Map<String, dynamic> responseBody = jsonDecode(response.body);
+
   if (response.statusCode == 200) {
-    print('✅ Password changed successfully');
-    print(jsonDecode(response.body));
-    return true;
+    print('✅ Profile updated successfully');
+    print(responseBody);
+    return responseBody['msg'] ?? 'Profile updated successfully';
   } else {
-    print('❌ Failed to change password');
-    print('Status: ${response.statusCode}');
+    print('❌ Failed to update profile');
+    print('Status code: ${response.statusCode}');
     print('Body: ${response.body}');
-    return false;
+    return responseBody['msg'] ?? 'Failed to update profile';
   }
 }
+//تم تغيير كلمة المرور بنجاح.

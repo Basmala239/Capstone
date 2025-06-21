@@ -28,7 +28,7 @@ Widget userCard(AppUser user, BuildContext context, String token) {
           ),
           child: ListTile(
             leading: Icon(Icons.person),
-            title: Text(user.name ?? 'userName'),
+            title: Text(user.name),
             subtitle: Text("${user.email} • ${user.userType}"),
           )
       )
