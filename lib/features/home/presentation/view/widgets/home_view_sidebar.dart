@@ -12,7 +12,7 @@ import '../../../../auth/presentation/model_view/user_provider/user_provider.dar
 import '../../../../profile/presentation/view/profile_view/profile_view.dart';
 import '../../../../projects/presentation/pages/project_ideas_screen.dart';
 import '../../../../report/presentation/view/last_reports/report_view.dart';
-import '../../../../schedule/presentation/view/add_meeting/view/add_meeting_view.dart';
+import '../../../../schedule/presentation/view/schedule_view.dart';
 import '../../../../teams/presentation/pages/teams_tabs_screen.dart';
 import '../../../../user_management/presentation/all_users/view/all_users_view.dart';
 import '../../../data/model/list_item.dart';

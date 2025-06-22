@@ -11,8 +11,8 @@ import '../../../../date/repository/meeting_repository_impl.dart';
 import '../../../model_view/add_meeting/add_meeting_cubit.dart';
 
 
-class ScheduleView extends StatelessWidget {
-  const ScheduleView({super.key});
+class AddMeetingView extends StatelessWidget {
+  const AddMeetingView({super.key});
 
   @override
   Widget build(BuildContext context) {

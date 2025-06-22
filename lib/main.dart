@@ -1,15 +1,6 @@
-
 import 'package:capstone/features/auth/presentation/model_view/reset_password_provider/reset_password_provider.dart';
-
-
 import 'package:capstone/features/auth/presentation/model_view/admin_user_provider/admin_user_provider.dart';
-import 'package:capstone/features/auth/presentation/model_view/reset_password_provider/reset_password_provider.dart';
-
 import 'package:capstone/features/auth/presentation/model_view/supervisor_user_provider/supervisor_user_provider.dart';
-
-import 'package:capstone/features/home/presentation/student/view/widget/home_body.dart';
-
-
 import 'package:capstone/features/notification/service/notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -32,24 +23,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (context)=>StudentUserProvider()),
-          ChangeNotifierProvider(create: (context)=>AdminUserProvider()),
-          ChangeNotifierProvider(create: (context)=>SupervisorUserProvider()),
-        ChangeNotifierProvider(create: (context)=>VisibilityProvider()),
-        ChangeNotifierProvider(create: (context)=>LoginProvider()),
-        ChangeNotifierProvider(create: (context)=>UserProvider()),
-        ChangeNotifierProvider(create: (context)=>ResetPassword()),
-        ChangeNotifierProvider(create: (context)=>VerifyEmailProvider()),
-        ChangeNotifierProvider(create: (context)=>SetNewPassword()),
-    ],
-    child: MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Capstone',
-      home: SplashView(),
-    ));
+          ChangeNotifierProvider(create: (context) => StudentUserProvider()),
+          ChangeNotifierProvider(create: (context) => AdminUserProvider()),
+          ChangeNotifierProvider(create: (context) => SupervisorUserProvider()),
+          ChangeNotifierProvider(create: (context) => VisibilityProvider()),
+          ChangeNotifierProvider(create: (context) => LoginProvider()),
+          ChangeNotifierProvider(create: (context) => UserProvider()),
+          ChangeNotifierProvider(create: (context) => ResetPassword()),
+          ChangeNotifierProvider(create: (context) => VerifyEmailProvider()),
+          ChangeNotifierProvider(create: (context) => SetNewPassword()),
+        ],
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Capstone',
+          home: SplashView(),
+        ));
   }
 }
 

@@ -16,11 +16,6 @@ class ProfileView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ColorManager.blueCC,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(15),
-          ),
-        ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: ColorManager.white,),
           onPressed: (){

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../widgets/custom_appbar.dart';
 import '../model_view/project_cubit.dart';
-import '../../../../utils/here.dart';
 
 
 class ArchiveView extends StatelessWidget {
@@ -13,7 +12,6 @@ class ArchiveView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // extendBodyBehindAppBar: true,
       appBar: customAppBar('Archive', context),
       body: Stack(
         children: [
