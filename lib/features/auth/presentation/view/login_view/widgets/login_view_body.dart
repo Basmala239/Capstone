@@ -16,7 +16,7 @@ import 'package:provider/provider.dart';
 import '../../../../../home/presentation/view/home_view.dart';
 import '../../../../../profile/data/repository/get_profile_repository/profile_repository.dart';
 import '../../../../data/models/login_response/login_response_model.dart';
-import '../../../model_view/login_provider/Login_provider.dart';
+import '../../../model_view/login_provider/login_provider.dart';
 
 class LoginViewBody extends StatefulWidget {
   final String type;
@@ -44,7 +44,6 @@ class _LoginViewBodyState extends State<LoginViewBody> {
       );
 
       final Map<String, dynamic> jsonResponse = json.decode(response.body);
-      print(jsonResponse);
 
       if (jsonResponse['status'] == false) {
         Provider.of<LoginProvider>(context, listen: false).wrongType(jsonResponse['msg']);
@@ -68,7 +67,6 @@ class _LoginViewBodyState extends State<LoginViewBody> {
         Provider.of<UserProvider>(context,listen: false).setUser((Provider.of<AdminUserProvider>(context,listen: false).user) as Admin, userData.accessToken);
       }
       if( user.userType == 'supervisor'){
-        print('supervisor');
         Provider.of<SupervisorUserProvider>(context,listen: false).setSupervisor((await getProfile(userData.accessToken)) as Supervisor, userData.accessToken);
         Provider.of<UserProvider>(context,listen: false).setUser((Provider.of<SupervisorUserProvider>(context,listen: false).user) as Supervisor, userData.accessToken);
       }
@@ -78,7 +76,6 @@ class _LoginViewBodyState extends State<LoginViewBody> {
         MaterialPageRoute(builder: (context) => HomeView()),
       );
     } catch (e) {
-      print("Login error: $e");
       Provider.of<LoginProvider>(context, listen: false).wrongType('An error occurred. Please try again.');
     }
   }
@@ -144,8 +141,6 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 Provider.of<LoginProvider>(context, listen: false).setPassword(
                     _passwordController.text);
                 if(Provider.of<LoginProvider>(context, listen: false).validateForm()){
-                  print("valid");
-
                   _login();
                 }
 

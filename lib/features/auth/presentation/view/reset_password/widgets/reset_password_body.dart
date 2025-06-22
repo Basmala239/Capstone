@@ -57,7 +57,6 @@ class ResetPasswordBody extends StatelessWidget {
                   final http.Response response = await sendPasswordResetLink(
                       email.text);
                   if (response.statusCode == 200) {
-                    print('Password reset link sent successfully.');
                     final codeResponse = CodeResponse.fromJson(json.decode(response.body));
                     Provider.of<ResetPassword>(context, listen: false).reset(1);
                     NotificationService().showNotification(
@@ -68,8 +67,6 @@ class ResetPasswordBody extends StatelessWidget {
                         builder: (context) =>
                             VerifyEmailView(email: email.text, code:codeResponse.data.code, type:type)));
                   } else {
-                    print('Failed to send reset link: ${response.statusCode}');
-                    print('Response: ${response.body}');
                     Provider.of<ResetPassword>(context, listen: false).reset(0);
                   }
                 }

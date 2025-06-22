@@ -5,6 +5,7 @@ import '../../../../../../resources/text_styles.dart';
 import '../../../../../../widgets/background.dart';
 import '../../../../data/repository/delete_user_repository/delete_user_repository.dart';
 import '../../../all_users/view/all_users_view.dart';
+import '../../../update_user/update_user_view.dart';
 import '../../widget/show_dialog.dart';
 class GetSupervisorView extends StatelessWidget {
   const GetSupervisorView({super.key, required this.id, required this.token});
@@ -43,7 +44,8 @@ class GetSupervisorView extends StatelessWidget {
           ],
               onSelected: (String choice) async {
                 if (choice == 'Edit') {
-                  //Navigator.push(context, MaterialPageRoute(builder: (context)=>EditProfileView()));
+                  Navigator.pop(context);
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>UpdateUserView(token: token, id: id, type: 'supervisor',)));
                 } else {
                   if (await showExitDialog(context)) {
                     if (await deleteUser(token: token, userId: id, userType: 'supervisor',)) {
@@ -58,8 +60,6 @@ class GetSupervisorView extends StatelessWidget {
                         ),
                       );
                     }
-                  } else {
-                    print('cancel');
                   }
                 }
               }

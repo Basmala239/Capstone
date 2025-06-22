@@ -45,9 +45,9 @@ class NotificationsViewBody extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(notification.data.message,
+                          Text(notification.data.type,
                             style: TextStyles.black18W400,),
-                          Text(notification.data.description,
+                          Text(notification.data.message,
                             style: TextStyles.gray14W200,
                           maxLines: 1,),
                         ],

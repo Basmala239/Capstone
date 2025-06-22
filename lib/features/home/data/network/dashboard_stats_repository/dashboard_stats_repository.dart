@@ -13,7 +13,6 @@ Future<Map<String, dynamic>> fetchDashboardStats(String token) async {
       'Accept': 'application/json',
     },
   );
-  print(response.body);
   if (response.statusCode == 200) {
     final data = jsonDecode(response.body);
     if (data is Map<String, dynamic>) {

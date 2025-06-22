@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-Future<bool> addUser({
+Future<String> addUser({
   required String token,
   required String name,
   required String email,
@@ -11,7 +11,6 @@ Future<bool> addUser({
   String? github,
   String? department,
   String? year,
-  String? studentName,
   String? maxTeamsAllowed,
   String? availability,
 }) async {
@@ -31,7 +30,6 @@ Future<bool> addUser({
     if (github != null) request.fields['github'] = github;
     if (department != null) request.fields['department'] = department;
     if (year != null) request.fields['year'] = year;
-    if (studentName != null) request.fields['student_name'] = studentName;
   } else if (userType == 'supervisor') {
     if (availability != null) request.fields['availability'] = availability;
     if (department != null) request.fields['department'] = department;
@@ -46,10 +44,9 @@ Future<bool> addUser({
   final body = await jsonDecode(responseBody);
   if ((response.statusCode == 200 || response.statusCode == 201) &&body['status']==true){
     print('✅ User created: $body');
-    return true;
   } else {
     print('❌ Failed to create user. Status: ${response.statusCode}');
     print('Error: $responseBody');
-    return false;
   }
+  return body['msg'];
 }

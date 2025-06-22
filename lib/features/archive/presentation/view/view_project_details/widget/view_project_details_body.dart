@@ -16,7 +16,7 @@ class ViewProjectDetailsBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(
               width: double.infinity,
               child: Card(
                   elevation: 2,
@@ -38,7 +38,7 @@ class ViewProjectDetailsBody extends StatelessWidget {
               ),
             ),
             SizedBox(height: 10),
-            Container(
+            SizedBox(
               width: double.infinity,
               child: Card(
                   elevation: 2,
@@ -64,7 +64,7 @@ class ViewProjectDetailsBody extends StatelessWidget {
               ),
             ),
             SizedBox(height: 15),
-            Container(
+            SizedBox(
               width: double.infinity,
               child: Card(
                   elevation: 2,

@@ -34,8 +34,8 @@ class Student {
       gender: gender ?? this.gender,
       profileImage: profileImage ?? this.profileImage,
       isInvited: isInvited ?? this.isInvited,
-      avatarUrl: avatarUrl ?? this.avatarUrl,
-      email: email ?? this.email,
+      avatarUrl: avatarUrl,
+      email: email,
     );
   }
 }

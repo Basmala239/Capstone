@@ -16,11 +16,8 @@ Future<Map<String, dynamic>?> fetchTaskCompletionDistribution(String token) asyn
 
   if (response.statusCode == 200) {
     final data = jsonDecode(response.body);
-    print('✅ Task Completion Distribution: $data');
     return data;
   } else {
-    print('❌ Failed to fetch data: ${response.statusCode}');
-    print('Response: ${response.body}');
     return null;
   }
 }

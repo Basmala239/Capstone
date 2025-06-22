@@ -5,7 +5,7 @@ import 'package:capstone/features/auth/presentation/model_view/supervisor_user_p
 import 'package:capstone/features/notification/service/notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'features/auth/presentation/model_view/login_provider/Login_provider.dart';
+import 'features/auth/presentation/model_view/login_provider/login_provider.dart';
 import 'features/auth/presentation/model_view/set_new_password_provider/set_new_password_provider.dart';
 import 'features/auth/presentation/model_view/student_user_provider/student_user_provider.dart';
 import 'features/auth/presentation/model_view/user_provider/user_provider.dart';

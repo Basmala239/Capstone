@@ -16,7 +16,6 @@ class NotificationRepository {
         'Accept': 'application/json',
       },
     );
-
     if (response.statusCode == 200) {
       final Map<String, dynamic> jsonData = json.decode(response.body);
       final List data = jsonData['all_notifications'] ?? [];

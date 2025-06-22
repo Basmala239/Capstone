@@ -131,8 +131,7 @@ class AddUserBody extends StatelessWidget {
                     onTap: () async {
                       cubit.validateForm();
                       if (context.read<AddUserCubit>().state.errors.isEmpty) {
-
-                        if(await addUser(
+                        String response= await addUser(
                         token: token,
                         name: _nameController.text.trim(),
                         email: _emailController.text.trim(),
@@ -142,23 +141,20 @@ class AddUserBody extends StatelessWidget {
                         github: _githubController.text.trim(),
                         department: _departmentController.text.trim(),
                         year: _yearController.text.trim(),
-                        studentName: _nameController.text.trim(),
                         maxTeamsAllowed: _maxTeamsAllowedController.text.trim(),
                         availability: _availabilityController.text.trim()
-                        )){
+                        );
+                          if(response =='تم إضافة المستخدم بنجاح.'){
                           Navigator.pop(context);
                           Navigator.pop(context);
                           Navigator.push(context, MaterialPageRoute(builder: (context)=>UserListView(token: token,)));
-                        }else{
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('Server Error'),
-                              duration: Duration(seconds: 2),
-                            ),
-                          );
                         }
-
-                        print("Form is valid, submit data");
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(response),
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
                       }
                     },
                     editwidth: 130,

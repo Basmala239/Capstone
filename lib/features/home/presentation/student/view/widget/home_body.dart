@@ -95,7 +95,7 @@ class StudentHomeViewBody extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 10),
-                Container(
+                SizedBox(
                   height: 20,
                   child: Row(
                     children: [
@@ -128,7 +128,7 @@ class StudentHomeViewBody extends StatelessWidget {
                 children: [
                   Center(child: Text('Cumulative Task Completion Over Time',
                       style: TextStyle(fontWeight: FontWeight.bold))),
-                  Container(
+                  SizedBox(
                     height: 240,
                     child: LineChart(
                       LineChartData(

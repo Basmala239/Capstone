@@ -3,16 +3,10 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 class NotificationService{
   final notificationPlugin= FlutterLocalNotificationsPlugin();
 
-  bool _isInitialized = false;
-
-  bool get isInitialized => _isInitialized;
-
-  set isInitialized(bool value) {
-    _isInitialized = value;
-  }
+  bool isInitialized = false;
   // init
   Future<void> initNotification() async{
-    if(_isInitialized) return;
+    if(isInitialized) return;
 
     const initSettingAndroid= AndroidInitializationSettings('@mipmap/ic_launcher');
     const initSettingIOS= DarwinInitializationSettings(
